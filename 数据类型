@@ -1,0 +1,26 @@
+public class VariableType{
+    public static void main(String[] args) {
+    //byte
+    byte b=10;
+    System.out.println("byte: "+b);
+    //short
+    short s=100;
+    System.out.println("short: "+s);
+    //int
+    int i=1000;
+    System.out.println("int: "+i);
+    //long
+    long l=99999;
+    System.out.println("long: "+l);
+    //float
+    float f=10.5f;//注意后缀
+    System.out.println("float: "+f);
+    //char
+    char c='中';
+    System.out.println("char: "+c);
+
+    //boolean
+    boolean bl=true;
+    System.out.println("boolean: "+bl);
+    }
+}
