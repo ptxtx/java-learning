@@ -1,0 +1,21 @@
+// import java.util.Scanner;//导包（在类定义的上面）
+// public class ScannerDemo{
+//     public static void main(String[] args) {
+//    Scanner sc=new Scanner(System.in);//创建对象-表示要使用scanner类。
+
+//    //接收数据
+//    int i=sc.nextInt();//变量i接受键盘录入数据
+//    System.out.println(i);
+//     }
+// }
+
+import java.util.Scanner;
+public class ScannerPractice{
+    public static void main(String[]  args){
+        Scanner sc=new Scanner(System.in);//创建对象(多个数据 也只需要打一次招呼 直接接受第二个数据即可)
+        int num1=sc.nextInt();
+        int num2=sc.nextInt();
+        System.out.println(num1+num2);
+        
+    }
+}
