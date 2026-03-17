@@ -1,0 +1,29 @@
+import java.util.Scanner;
+public class yunsuanfu {
+    public static void main(String[] args) throws Exception {
+        System.out.println(1.1+1.01);//在代码中 如果有小数运算，结果有可能不精确 也有可能正确。
+        //除法
+        System.out.println(10/2);
+        System.out.println(10/3);//应该是3.33333 但是结果是3 整数参与运算结果也只能是整数  如果想要小数 可以写成10.0/3 或者 10/3.0
+
+
+        //取模（求余数）
+        System.out.println(10%2);//0
+        System.out.println(10%3);//1
+        //取模应用场景；判断一个数是否是偶数
+                     //判断整除、斗地主发牌 根据余数发牌给不同的人。
+
+        //练习
+Scanner sc=new Scanner(System.in);
+System.out.println("请输入第一个整数");
+int a=sc.nextInt();
+int ge,shi,bai;
+ge=a%10;
+shi=(a/10)%10;
+bai=(a/100)%10;
+System.out.println("个位数是："+ge);
+System.out.println("十位数是："+shi);
+System.out.println("百位数是："+bai);
+
+    }
+}
