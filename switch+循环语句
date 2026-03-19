@@ -63,3 +63,31 @@ for(int i=n1;i<=n2;i++){
 System.out.println("sum3="+sum3);
 }
 }
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//while 及其和for的区别
+import java.util.Scanner;
+public class whileee {
+    public static void main(String[] args) {
+
+//whiledemo1
+/*int i=1;
+while(i<=10){
+    System.out.println(i);
+    i++;
+}
+*/
+/*for和while的区别：1.for循环中 控制循环的变量归属于for语法结构中，在for循环结束后 就不能再被访问了，而while循环中 控制循环的变量是独立的，在while循环结束后 仍然可以被访问。
+2.for循环适合已知循环次数的情况，而while循环适合未知循环次数的情况。
+下面来练习*/
+int count=0;
+double height=8844430.0;
+double hou=0.1;//适合用while因为不知道循环的次数 即不知道要折多少次
+while(hou<height){
+    count++;
+    hou=hou*2;
+}
+System.out.println(count);
+
+
+}
+}
