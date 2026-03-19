@@ -1,0 +1,36 @@
+import java.util.Scanner;
+public class yunsuanfu {
+    public static void main(String[] args) {
+//switch练习
+Scanner sc=new Scanner(System.in);
+System.out.println("请输入一个星期数（1-7）：");
+int week=sc.nextInt();
+switch(week){
+  // case 1:System.out.println("工作日");break;
+  // case 2:System.out.println("工作日");break;
+  // case 3:System.out.println("工作日");break;
+  // case 4:System.out.println("工作日");break;
+  // case 5:System.out.println("工作日");break;
+  // case 6:System.out.println("休息日");break;
+  // case 7:System.out.println("休息日");break;
+  // default:System.out.println("没有这个星期");break;
+
+
+  //利用case穿透 少写重复语句：
+  /*case 1,2,3,4,5:System.out.println("工作日");break;
+  case 6,7:System.out.println("休息日");break;
+  default:System.out.println("没有这个星期");break;*/
+
+
+  //利用JDK12新特性，case标签可以使用表达式：（这样就不用break了，case标签后面可以直接写要执行的语句）
+  case 1,2,3,4,5->System.out.println("工作日");
+  case 6,7->System.out.println("休息日");
+  default->System.out.println("没有这个星期");
+
+}
+   
+
+
+}
+}
+//利用switch的新老方法 完成练习
