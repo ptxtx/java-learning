@@ -34,3 +34,32 @@ switch(week){
 }
 }
 //利用switch的新老方法 完成练习
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//循环语句
+import java.util.Scanner;
+public class xunhuanyuju {
+    public static void main(String[] args) {
+//for循环和c++一样
+/*for(int i=1;i<=10;i++){
+    System.out.println("hello world"+"  "+i);*/
+    
+   //求和
+   int sum=0;//求和的变量不能定义在循环里面，因为变量只在所属的大括号中有效；；如果把变量定义在循环里面，每次循环都会重新定义sum，sum的值就会被覆盖掉，无法实现累加的效果。
+   for(int i=1;i<=5;i++){
+    sum=sum+i;
+   }
+   System.out.println("sum="+sum);
+   int sum2=0;
+for(int i=1;i<=100;i++){
+    if(i%2==0)sum2+=i;
+}
+System.out.println("sum2="+sum2);
+Scanner sc=new Scanner(System.in);
+int n1=sc.nextInt();
+int n2=sc.nextInt();int sum3=0;
+for(int i=n1;i<=n2;i++){
+    if(i%3==0&&i%5==0)sum3+=i;
+}
+System.out.println("sum3="+sum3);
+}
+}
