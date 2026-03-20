@@ -1,0 +1,21 @@
+//1.输入一个数 输出其回文形式并判断这个数是不是回文数
+import java.util.Scanner;
+public class exercise {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("enter the number");
+        int n=sc.nextInt();
+        int temp=n;
+        int num=0;
+        while(n!=0){
+            int ge=n%10;
+            num=num*10+ge;
+            n=n/10;//这个操作是实现回文的关键步骤！！
+        }
+System.out.println(num);
+if(num==temp){
+    System.out.println("yes");
+}
+else {
+    System.out.println("no");}
+}}
