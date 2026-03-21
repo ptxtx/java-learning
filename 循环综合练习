@@ -1,0 +1,49 @@
+import java.util.Scanner;
+public class exercise {
+    public static void main(String[] args) {
+//逢7过
+//规则：从任意一个数字开始报数，当你要报的数字是包含7或者是7的倍数时，你要说过（需求：打印出1-100之间满足逢7必过的数据
+Scanner sc=new Scanner(System.in);
+System.out.println("请输入一个起始数字：");
+int start=sc.nextInt();
+for(int i=start;i<=100;i++){
+    if(i%7==0){System.out.println(i);continue;}
+    int temp=0;int now=i;int shuchu=i;
+    while(now>0){
+        temp=now%10;
+        if(temp==7){System.out.println(shuchu);break;}
+        now/=10;//如果不确定位数 可以这样 如果确定了三位数：i%10==7||i%10==7||i/10%10==7
+    }
+}
+// //————————————————————————————————————————错误点：第一次在循环内部修改了i 导致循环程序崩溃——————————————————————————————————————————————————————————————————————
+
+
+
+
+
+
+// //求平方根
+// //需求：键盘录入一个大于等于2的整数x 计算并返回x的平方根（结果只保留整数部分，小数部分将舍去）
+Scanner sc=new Scanner(System.in);
+System.out.println("请输入一个大于等于2的整数：");
+int x=sc.nextInt();
+for(int i=1;i<=x;i++){
+    if(i*i==x){System.out.println(i);break;}
+    if(i*i>x){System.out.println(i-1);break;}
+}
+
+
+//
+Scanner sc=new Scanner(System.in);
+System.out.println("请输入一个整数：");
+int x=sc.nextInt();boolean flag=true;
+if(x==2){System.out.println("yes");flag=false;};
+if(x>2&&x%2==0){System.out.println("no");flag=false;}
+else{
+for(int i=3;i<x;i+=2){
+    if(x%i==0){System.out.println("no");flag=false;break;}
+
+}
+if(flag){System.out.println("yes");}//————————————————————————————————————错误点：在for循环中直接else 这样会一直输出yes——————————————————————————————————
+}
+    }}
