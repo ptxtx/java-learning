@@ -1,0 +1,11 @@
+//这是如何获得随机数 的代码
+import java.util.Random;
+public class exercise {
+    public static void main(String[] args) {
+//获取随机数：random
+        Random r=new Random();
+        int a=r.nextInt(100);//0-99(左闭右开)
+        System.out.println("随机数是："+a);
+    }
+ //——————————————————————————————————————————————————如果想要1~100该怎么写嘞： r.nextInt(100)+1    如此就实现任意数到任意数之间的随机数——————————————————————————————————————————————————————————
+}
