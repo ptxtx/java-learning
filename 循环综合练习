@@ -41,9 +41,12 @@ if(x==2){System.out.println("yes");flag=false;};
 if(x>2&&x%2==0){System.out.println("no");flag=false;}
 else{
 for(int i=3;i<x;i+=2){
+//Math.sqrt(x)
     if(x%i==0){System.out.println("no");flag=false;break;}
 
 }
 if(flag){System.out.println("yes");}//————————————————————————————————————错误点：在for循环中直接else 这样会一直输出yes——————————————————————————————————
 }
+
+//这个代码还可以优化 如果x很大 比如10w  这个时候循环次数就不能是10w次     i<sqrt（10w） 即一个数的因数 其中一个必定小于其平方根 故循环只用到平方根即可。
     }}
