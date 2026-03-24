@@ -1,0 +1,111 @@
+import java.util.Random;
+public class ArrayDemo1 {
+    public static void main(String[] args) {
+      //数组的动态初始化：初始化只指定数组长度，由系统为数组分配初始值
+      //格式：数据类型[] 数组名 = new 数据类型[数组长度];
+     // int arr[]=new int[3];
+        //动态初始化后，数组元素会自动赋值为默认值
+        //整数类型默认值为0；小数0.0；char类型默认值为'\u0000'；boolean类型默认值为false；引用数据类型默认值为null
+        //动态初始化和静态初始化的区别：
+        //1.动态初始化只指定数组长度，由系统为数组分配初始值；静态初始化在定义数组的同时指定数组元素的初始值
+
+        //数组练习
+        //1.生成10个随机数并求和
+//         Random random=new Random();
+//         int arr[]=new int[10];
+//         for(int i=0;i<10;i++){
+//             arr[i]=random.nextInt(100)+1;
+//         }
+//         int sum=0;
+//         for(int i=0;i<10;i++){
+//             sum+=arr[i];
+//         }
+//         for(int i=0;i<10;i++){
+//             System.out.println(arr[i]);
+//         }
+// System.out.println("数组元素的和为："+sum);
+
+
+
+//2.交换数据
+// int arr[]={1,2,3,4,5};
+// int temp=0;
+// temp=arr[4];
+// arr[4]=arr[0];
+// arr[0]=temp;
+// for(int i=0;i<arr.length;i++){
+//     System.out.println(arr[i]);
+
+
+//     }
+
+
+
+
+//3.打乱数组中的数据
+// int arr[]={1,2,3,4,5};
+// Random random=new Random();
+// for(int i=0;i<arr.length;i++){
+//     int temp=0;
+//     temp=arr[i];
+//     int index=random.nextInt(arr.length);
+//     arr[i]=arr[index];
+//     arr[index]=temp;
+// }
+// for(int i=0;i<arr.length;i++){
+//     System.out.println(arr[i]);
+// }
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————（下面这道题做错啦）——————————————
+//4.需求：获取10个1-100之间的随机数并存入到数组当中，要求保证数据是唯一的
+// Random random=new Random();
+// int arr[]=new int[10];
+// for(int i=0;i<10;i++){
+//     arr[i]=random.nextInt(100)+1;
+// }
+// for(int i=0;i<10;i++){
+//     for(int j=0;j<10;j++){
+//         while(arr[i]==arr[j]&&i!=j){//仅仅只保证了新生成的 arr[j] 不等于 arr[i]。但它没有去检查新生成的 arr[j] 是否等于数组里的其他数字。
+//             arr[j]=random.nextInt(100)+1;
+//         }
+//     }
+// }
+// for(int i=0;i<10;i++){
+//     System.out.println(arr[i]);
+//}
+//强烈建议放弃“先装满，后查重”的思路，也就是：手里拿一个空数组，生成一个随机数，去数组里看一圈，没有相同的才放进去，放满 10 个为止。
+
+//————————改正方法：
+
+        Random random = new Random();
+        int[] arr = new int[10];
+        int count = 0;// 记录当前已经成功存入了几个不重复的数字------------------------------这一步很重要
+
+        while (count < 10) {
+            int num = random.nextInt(100) + 1; // 生成随机数
+            boolean isDuplicate = false; // 标记是否重复
+            
+            // 遍历目前已经存入的数字，检查是否重复
+            for (int i = 0; i < count; i++) {
+                if (arr[i] == num) {
+                    isDuplicate = true;
+                    break; // 发现重复，停止检查
+                }
+            }
+            
+            // 如果不重复，则存入数组，并将计数器加1
+            if (!isDuplicate) {
+                arr[count] = num;
+                count++;
+            }
+        }
+
+        // 打印结果
+        for (int i = 0; i < 10; i++) {
+            System.out.println(arr[i]);
+        }
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+}
+}
