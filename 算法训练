@@ -40,7 +40,7 @@ for(int i=0;i<slow;i++){
     System.out.println(nums[i]);}
 }
 }
-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //2.给你两个整数m和n，表示红包的总金额（单位：分）和人数，现在有n个人来抽红包 每个人都是随机的 打印每个人领的红包金额
 //注 每个人最少1分钱
 //注2. 每个人领完红包后，至少预留1*n分钱
@@ -59,3 +59,90 @@ for(int i=1;i<=n-1;i++){
   System.out.println("第"+i+"个人抽取了"+mymoney+"分，剩余"+m+"分");
 }
 System.out.println("第"+n+"个人抽取了"+m+"分，剩余0分");
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+ public static void bubbleSort(int[] arr){
+    for(int i=0;i<arr.length-1;i++){
+        for(int j=0;j<arr.length-1-i;j++){
+            if(arr[j]>arr[j+1]){
+                int temp=arr[j];
+                arr[j]=arr[j+1];
+                arr[j+1]=temp;
+            }
+        }
+    }
+}
+int arr1[]={1,2,3,4,5,6,7,8,9};
+int arr2[]={1,2,3,4,5};
+int length1=arr1.length;
+int length2=arr2.length;
+int length=length1+length2;
+int arr3[]=new int[length];
+for(int i=0;i<length;i++){
+    if(i<length1)arr3[i]=arr1[i];
+    else arr3[i]=arr2[i-length1];
+}
+bubbleSort(arr3);
+    if(length%2!=0)System.out.println(arr3[length/2]);
+    else System.out.println((arr3[length/2-1]+arr3[length/2])/2.0);
+
+}
+————————————顺便附上其他排序算法————
+//选择排序
+public static void selectionSort(int[] arr){
+    for(int i=0;i<arr.length-1;i++){
+        int minIndex=i;
+        for(int j=i+1;j<arr.length;j++){
+            if(arr[j]<arr[minIndex]){
+                minIndex=j;
+            }
+        }
+        int temp=arr[i];
+        arr[i]=arr[minIndex];
+        arr[minIndex]=temp;
+    }
+}
+
+//插入排序
+public static void insertionSort(int[] arr){
+    for(int i=1;i<arr.length;i++){
+        int key=arr[i];
+        int j=i-1;
+        while(j>=0 && arr[j]>key){
+            arr[j+1]=arr[j];
+            j--;
+        }
+        arr[j+1]=key;
+    }
+}
+
+//快速排序
+public static void quickSort(int[] arr){
+    if(arr.length==0)return;
+    quickSortHelper(arr,0,arr.length-1);
+}
+
+public static void quickSortHelper(int[] arr,int low,int high){
+    if(low<high){
+        int pi=partition(arr,low,high);
+        quickSortHelper(arr,low,pi-1);
+        quickSortHelper(arr,pi+1,high);
+    }
+}
+
+public static int partition(int[] arr,int low,int high){
+    int pivot=arr[high];
+    int i=low-1;
+    for(int j=low;j<high;j++){
+        if(arr[j]<pivot){
+            i++;
+            int temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+        }
+    }
+    int temp=arr[i+1];
+    arr[i+1]=arr[high];
+    arr[high]=temp;
+    return i+1;
+}
+————————————————————如果前提有两个数组是正序数组 那么可以优化流程：
