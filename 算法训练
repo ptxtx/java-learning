@@ -1,0 +1,44 @@
+//01-删除数据（删除一个数组中等于val的值）
+import java.util.Random;
+public class test1 {
+    public static void main(String[] args) {
+// int nums[]={0,1,2,2,3,0,4,2};
+// int val=2;
+// boolean flags[]=new boolean[nums.length];
+// for(int i=0;i<nums.length;i++){
+// flags[i]=false;
+// }
+// for(int i=0;i<nums.length;i++){
+//     if(nums[i]==val){
+//         flags[i]=true;
+//     }
+// }
+// for(int i=0;i<nums.length;i++){
+//     if(flags[i]==false){
+//         System.out.println(nums[i]);
+//     }
+// }
+
+
+
+
+————————————————————————————————————————————————————//另外一种方法：双指针
+//慢指针：存入的位置 快指针：找数字2    是2：舍弃快指针位置的数据  不是2：快指针的数据存入慢指针位置
+int nums[]={0,1,2,2,3,0,4,2};
+int val=2;
+int slow=0;
+int fast=0;
+while(fast<nums.length){
+if(nums[fast]!=val){
+  
+    nums[slow]=nums[fast];
+      slow++;
+}
+fast++;
+}
+for(int i=0;i<slow;i++){
+    System.out.println(nums[i]);}
+}
+}
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
