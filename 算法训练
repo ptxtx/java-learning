@@ -60,7 +60,8 @@ for(int i=1;i<=n-1;i++){
 }
 System.out.println("第"+n+"个人抽取了"+m+"分，剩余0分");
 ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
- public static void bubbleSort(int[] arr){
+//03 二路归并找中位数
+public static void bubbleSort(int[] arr){
     for(int i=0;i<arr.length-1;i++){
         for(int j=0;j<arr.length-1-i;j++){
             if(arr[j]>arr[j+1]){
@@ -146,3 +147,43 @@ public static int partition(int[] arr,int low,int high){
     return i+1;
 }
 ————————————————————如果前提有两个数组是正序数组 那么可以优化流程：
+import java.util.Arrays; // 必须加这个，用于打印数组
+
+public class test1 {
+    public static void main(String[] args) {
+        // 两个有序数组
+        int arr1[] = {1,2,3,4,5,6,7,8,9};
+        int arr2[] = {1,2,3,4,5};
+        
+        // 创建新数组，长度是两个数组之和
+        int arr3[] = new int[arr1.length + arr2.length];
+        
+        int p1 = 0; // 遍历 arr1
+        int p2 = 0; // 遍历 arr2
+        int p3 = 0; // 遍历 arr3
+
+        // 1. 两个数组都没遍历完，比较大小放入
+        while (p1 < arr1.length && p2 < arr2.length) {
+            if (arr1[p1] < arr2[p2]) {
+                arr3[p3++] = arr1[p1++];
+            } else {
+                arr3[p3++] = arr2[p2++];
+            }
+        }
+
+        // 2. 把 arr1 剩下的元素放进去
+        while (p1 < arr1.length) {
+            arr3[p3++] = arr1[p1++];
+        }
+
+        // 3. 把 arr2 剩下的元素放进去
+        while (p2 < arr2.length) {
+            arr3[p3++] = arr2[p2++];
+        }
+
+        // 打印最终结果
+        System.out.println("合并后的有序数组：");
+        System.out.println(Arrays.toString(arr3));
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
