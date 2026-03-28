@@ -246,4 +246,128 @@ public class test {
     System.out.println(sum);
     } 
 }
+————————————————————————————————————————————————————————————————————————————————————————————————————————
+//5.算法之大乐透
+import java.util.Random;
+import java.util.Scanner;
+public class lottery{
+    public static void main(String arg[]){
+      //1.利用random随机生成彩票号码
+      //2.scanner键盘录入模拟购买彩票
+      //3.判断中奖
+      int[]numbers=CreateLotteryNumber();
+  
+      int[]buy=buyLotteryNumbers();
 
+      //先判断中了几个前区（红球）再后区（黑球）  并且不需要位置一一对应 只需要数据能匹配就可以了
+      Judge(numbers,buy);
+
+  
+
+    }
+    public static int[] CreateLotteryNumber(){
+        //1.创建数组
+        int[] qianqu=new int[5];
+        int[] houqu=new int[2];
+        int []arr=new int[7];
+        Random random=new Random();
+        for(int i=0;i<5;){
+            int number=random.nextInt(35)+1;
+            //这里需要判断是否重复，可以再写一个判断重复的函数
+            boolean flag=contains(qianqu,number);
+            if(!flag){qianqu[i]=number;i++;}//只有当没有重复了 才把i++ 生成新的随机数
+
+        }
+        for(int i=0;i<2;){
+            int number=random.nextInt(12)+1;
+            boolean flag=contains(houqu,number);
+            if(!flag){houqu[i]=number;i++;}//只有当没有重复了 才把i++ 生成新的随机数
+        }
+        for(int i=0;i<7;i++){
+            if(i<5){
+                arr[i]=qianqu[i];
+            }else{
+                arr[i]=houqu[i-5];
+            }
+        }
+        return arr;
+     
+
+    }
+    public static boolean contains(int[] arr,int number){
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]==number){
+                return true;
+            }
+        }
+        return false;
+    }
+    //利用scanner键盘录入购买彩票。 购买要求：1-35选5个号码且唯一
+    public static int[] buyLotteryNumbers(){
+        int buy[]=new int[7];
+        Scanner sc=new Scanner(System.in);
+        for(int i=0;i<5;){
+            System.out.println("请输入第"+(i+1)+"个数字");
+            int num=sc.nextInt();
+            //判断范围
+           if(num<1||num>35){
+               System.out.println("输入有误，请重新输入");
+               continue;
+           }
+           //判断唯一
+           if(contains(buy,num)){
+               System.out.println("当前号码已存在，请重新输入");
+               continue;
+           }
+           buy[i]=num;
+           i++;
+
+    }
+    for(int i=0;i<2;){
+        System.out.println("请输入第"+(i+1)+"个数字");
+        int num=sc.nextInt();
+        if(num<1||num>12){
+            System.out.println("输入有误，请重新输入");
+            continue;
+        }
+        boolean flag=contains(buy,num);
+        if(flag){
+            System.out.println("当前号码已存在，请重新输入");
+            continue;
+        }
+        buy[i+5]=num;
+        i++;
+    }
+    return buy;
+}
+public static void PrintLotteryNumber(int[] arr){
+    for(int i=0;i<arr.length;i++){
+        System.out.print(arr[i]+" ");
+    }
+    System.out.println();
+}
+public static void Judge(int[] arr1,int[] arr2){
+    int countqian=0;
+    for(int i=0;i<5;i++){
+        for(int j=0;j<5;j++){
+            if(arr1[i]==arr2[j]){
+                countqian++;
+                break;
+            }
+        }
+    }
+    System.out.println("前区中奖个数："+countqian);
+    int counthou=0;
+    for(int i=0;i<2;i++){
+        for(int j=0;j<2;j++){
+            if(arr1[i+5]==arr2[j+5]){
+                counthou++;
+                break;
+            }
+        }
+    }
+    System.out.println("后区中奖个数："+counthou);
+}
+}
+---这道题主要在于方法的编写 和判断范围和重复
+————————————————————————————————————————————————————————————————————————————————————————————————————————
