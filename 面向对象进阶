@@ -23,3 +23,37 @@ public class test {
         System.out.println(stu2.name+","+stu2.age+","+stu2.teacherName);
     }
 }
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+——————————工具类
+package oop.toolclasstest;
+
+public class test {
+//ArrayUtil util=new ArrayUtil(); 报错 无法创建对象
+public static void main(String[] args) {
+    int[] arr={1,2,3,4,7};
+    ArrayUtil.printArray(arr);//依旧类名调用方法
+    double avg=ArrayUtil.getAvg(arr);
+    System.out.println("Average: " + avg);
+}
+}
+public class ArrayUtil {
+//私有化构造方法
+private ArrayUtil(){};
+
+//定义静态方法
+public static void printArray(int[]arr){
+    for(int i=0;i<arr.length;i++){
+        System.out.print(arr[i]+" ");
+    }
+    System.out.println(); // 换行
+}
+//如果想返回一个字符串 就是public static String printArray(int[]arr){
+public static double getAvg(int[] arr){
+    int sum=0;
+    for(int i=0;i<arr.length;i++){
+        sum+=arr[i];
+    }
+    return (double)sum/arr.length;
+
+}
+}
