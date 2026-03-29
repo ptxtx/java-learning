@@ -159,6 +159,16 @@ public String getName() {
 //     this.name = name;
 // }
 }
-————————注意枚举的注意事项
+————————注意枚举的注意事项(枚举类的两个默认存在方法）
+//values&valueOf
+    //values:表示枚举类中的所有枚举值
+    //valueof:表示根据枚举值获取枚举对象
+    OrderState[] os=OrderState.values();
+    for(int i=0;i<os.length;i++){
+        System.out.println(os[i]);
+    }
+    OrderState oo2=OrderState.valueOf("o2");
+    System.out.println(oo2);
+
 ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————---——————————————————————————————
 
