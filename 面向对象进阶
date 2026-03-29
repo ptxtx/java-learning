@@ -57,3 +57,108 @@ public static double getAvg(int[] arr){
 
 }
 }
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//final关键字
+package oop.Finaltest;
+
+public class Student {
+String name;
+int age;
+
+public Student(){};
+public Student(String name,int age){
+    this.name=name;
+    this.age=age;
+}
+
+public String getName(){return name;}
+public int getAge(){return age;}
+public void setName(String name){this.name=name;}
+public void setAge(int age){this.age=age;}
+}
+public class finall {
+public static void main(String[] args) {
+    final int NUMBER=100;//此时变量里记录的数据无法改变
+    System.out.println(NUMBER+100);
+
+    //定义一个引用数据类型的变量
+    final Student STU=new Student("zhangsan",23);
+    //STU=new Student("lisi",24);//此时无法改变引用数据类型变量里记录的地址
+    STU.setName("lisi");
+    STU.setAge(78);
+    System.out.println(STU.getName()+" "+STU.getAge());
+}
+}
+————————————注意final的一些注意事项写在notability里面了
+————关于final的一些小练习
+package oop.Finaltest;
+
+public class javabean {
+public static void main(String[] args) {
+    Circle cl=new Circle(1.5);
+    System.out.println(cl.getRadius());
+    System.out.println(cl.getArea());
+    System.out.println(cl.getPerimeter());
+
+}
+}
+public class Circle {
+private double radius;
+private final double PI=3.14;
+
+public Circle(double radius) {
+    this.radius = radius;
+}
+public Circle(){};
+public double getRadius(){return radius;}
+
+public double getArea(){
+    return PI*radius*radius;
+}
+public double getPerimeter(){
+    return 2*PI*radius;
+}
+
+}
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//枚举
+package oop.enumm;
+
+public class enumtest {
+public static void main(String[] args) {
+   // OrderState o1=new OrderState("待支付");//可以创建无数订单状态，不符合题目需求（有限个订单状态）
+    //改成枚举类型
+
+    OrderState oo1=OrderState.o1;
+
+    //匹配
+    switch(oo1){
+        case o1->System.out.println("待支付");
+        case o2->System.out.println("处理中");
+        case o3->System.out.println("已完成");
+        case o4->System.out.println("已取消");
+    }
+
+}
+}
+public enum OrderState {
+    //这个类所有对象
+    o1("待支付"),
+    o2("处理中"), 
+    o3("已完成"),
+    o4("已取消");
+private String name;
+private  OrderState(String name) {
+    this.name=name;
+}//——————————————改成private 因为不让外界创建对象
+private  OrderState(){};
+public String getName() {
+    return name;
+}
+// public void setName(String name) {
+//     this.name = name;
+// }
+}
+————————注意枚举的注意事项
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————---——————————————————————————————
+
