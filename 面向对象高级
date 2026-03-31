@@ -41,3 +41,27 @@ public void NFC(){System.out.println("安卓手机可以使用NFC");
 
 }}
 ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//super关键字
+package oop.extendstest;
+
+public class test2 {
+    public static void main(String[] args){
+    Zi zi=new Zi();
+    zi.show();
+}
+static class Fu{
+    String name="Fu";
+}
+static class Zi extends Fu{
+    String name="Zi";
+    
+    public void show(){
+        String name="Zishow";
+        System.out.println(name);
+        System.out.println(this.name);
+        System.out.println(super.name);
+    }
+}
+
+}
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
