@@ -65,3 +65,25 @@ static class Zi extends Fu{
 
 }
 ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//this调用构造方法
+public class Student {
+    String name;
+    int age;
+    public Student(){
+        this("带参构造",18);
+    }
+    //this() 调用本类的其他构造方法。把"带参构造",18赋值给带参构造的形参
+    public Student(String name,int age){
+        this.name=name;
+        this.age=age;
+    }
+}
+public class Test {
+    public static void main(String[] args) {
+        Student stu=new Student();
+        System.out.println(stu.name+","+stu.age);
+    }
+}
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
