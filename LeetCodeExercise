@@ -118,5 +118,45 @@ public class l20 {
     }
 }
 ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//l28 找出字符串中第一个匹配项下标
+public class l28 {
+    public int strStr(String haystack, String needle) {
+        if (haystack == null || needle == null) {return -1;}
+        int len=needle.length();
+        for (int i = 0; i<=haystack.length()-len; i++) {//<=
+            if (haystack.charAt(i)==needle.charAt(0)){
+                if(haystack.substring(i,i+len).equals(needle)){return i;}//——————在 Java 中，== 比较的是两个字符串对象的内存地址，而不是它们的内容。
+//修改： 必须使用 .equals() 方法来比较字符串内容。
+            }
+        }
+        return -1;
+    }
+}
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//35. 搜索插入位置
+public class l35 {
+    public int searchInsert(int[] nums, int target) {
+//        int len=nums.length;
+//        if(len%2==0){//我想用二分查找，但是不知道怎么去递归
+//            if(target<nums[len/2-1]){return }
+//        }
+        int n = nums.length;
+        int left=0;
+        int right=n-1;
+        while(left<=right){
+            int mid=left+(right-left)/2;//中间
+            if(nums[mid]==target){return mid;}
+            else if(nums[mid]>target){
+                right=mid-1;
+            }
+            else{left=mid+1;}---------------------------左右双指针不断更新 如果找到则返回mid else返回left
+        }
+        return left;
 
+
+    }
+
+}
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//
 
