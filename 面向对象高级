@@ -85,5 +85,36 @@ public class Test {
     }
 }
 ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//多态练习
+public class Test {
+    public static void main(String[] args) {
+        Person person = new Person("小慧慧",20,"girl");
+        System.out.println(person.getName()+person.getAge()+person.getGender());
+
+        Bicycle bicycle = new Bicycle("飞鸽",5);
+        person.drive(bicycle);
+
+        Car c=new Car("宾利",80);
+        person.drive(c);
+    }
+}
+public class Person {
+  //省略构造方法以及getset
+    public void drive(Vehicle vehicle){//————————————————————————————！！！！————————————————————————————
+        vehicle.move();
+        //响铃
+        //vehicle.ringbell();
+        if(vehicle instanceof Bicycle){//这里使用instanceof来判断属于哪个子类
+            Bicycle bicycle=(Bicycle)vehicle;
+            bicycle.ringBell();
+        }
+        else if(vehicle instanceof Car){
+            Car car=(Car)vehicle;
+            car.hook();
+        }else{System.out.println("没有这个对象");}
+    }
+
+}/剩余代码前往intellij idea查看
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 
