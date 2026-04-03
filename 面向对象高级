@@ -104,7 +104,7 @@ public class Person {
         vehicle.move();
         //响铃
         //vehicle.ringbell();
-        if(vehicle instanceof Bicycle){//这里使用instanceof来判断属于哪个子类
+        if(vehicle instanceof Bicycle){————————————————————————————//这里使用instanceof来判断属于哪个子类
             Bicycle bicycle=(Bicycle)vehicle;
             bicycle.ringBell();
         }
