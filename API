@@ -46,3 +46,46 @@ public class Test {
     }
 }
 ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//字符串的比较
+import java.util.Scanner;
+
+public class Test {
+    public static void main(String[] args) {
+//        String username = "zhangsan";
+//        String rightUsername="Zhangsan";
+//        boolean result = username.equals(rightUsername);//必须完全一样
+//        System.out.println(result);
+//
+//        boolean result1 = username.equalsIgnoreCase(rightUsername);//忽略大小写
+//        System.out.println(result1);
+
+
+        //小练习
+        String rightUsername = "zhangsan";
+        String rightPassword = "123456";
+
+        Scanner input = new Scanner(System.in);
+
+        for (int i = 0; i < 3; i++) {
+            System.out.println("请输入用户名：");
+            String username = input.next();
+            System.out.println("请输入密码：");
+            String password = input.next();
+            boolean result = username.equals(rightUsername) && password.equals(rightPassword);
+            //如果对bool类型进行判断时，不建议写==，可以把变量直接写在括号中
+            if (result) {
+                System.out.println("登陆成功");
+                break;
+            } else {
+                if (i < 2) System.out.println("登陆失败,还剩下" + (2 - i) + "次机会");
+                else {
+                    System.out.println("登陆失败,账号已锁定");
+
+
+                }
+            }
+        }
+
+    }}
+————————————————————————————————————————————————————
+//小练习2
