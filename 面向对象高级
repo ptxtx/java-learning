@@ -337,6 +337,41 @@ public class Outer {
     }
 }
 —————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//匿名内部类
+public class Test {
+    public static void main(String[] args) {
+        //要求：在测试类中调用下面的goSwimming
+/*
+        //传统方法：
+        Student s=new Student();
+        goSwimming(s);
+
+        如果Student类我只要用到一次，那么这个java文件单独新建就有点浪费
+        是否可以不新建这个Java文件，只要里面的代码
+        匿名内部类的作用：少定义一个Java文件
+
+
+        匿名内部类的定义格式
+          new 类名/接口名（）{
+          重写类/接口里面的方法
+          }
+
+          最终格式可以理解为：是一个没有名字的Java类的对象
+         */
+   Swim s= new Swim(){
+        public void swim(){
+            System.out.println("学生正在游泳");
+        }
+    };
+   goSwimming(s);
+    }
+    public static void goSwimming(Swim s){
+        s.swim();
+    }
+}
+public interface Swim {
+    public abstract void swim();
+}
 
 
 
