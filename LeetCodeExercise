@@ -199,5 +199,39 @@ public class l67 {
     }
 }
 ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//108 升序数组构造二叉搜索树
+//————————————————知识点：二叉搜索树的中序遍历是升序遍历，正好对应给定的升序数组
+public class l108 {
+    public TreeNode sortArrayToBST(int[] nums) {
+        return helper(nums,0,nums.length-1);
+
+    }
+    public TreeNode helper(int[] nums,int left,int right){
+        if(left>right){
+            return null;
+        }
+        //总是选择中间位置左边的数字作为根结点
+        int mid=(left+right)/2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left=helper(nums,left,mid-1);
+        root.right=helper(nums,mid+1,right);
+        return root;
+    }
+}
+public class TreeNode {//——————————————————注意这里treenode的构造方式与c++不同！！
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(){}
+    TreeNode(int val){
+        this.val=val;
+    }
+    TreeNode(int val,TreeNode left,TreeNode right){
+        this.val=val;
+        this.left=left;
+        this.right=right;
+    }
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 
 
