@@ -191,7 +191,39 @@ public class Rabbit extends Animal{
     }
 }
 //————————————为什么这里要用接口？因为不是所有动物都是swim特性，不能抽取到父类中，但是某几种子类又都有这个行为，所以来一个接口
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//接口新特性
+public interface Inter {
+    public abstract void method1();
+    public abstract void method2();
 
+
+    public default void func(){
+        System.out.println("接口中新增的默认方法");
+    }
+}
+public class InterImpl implements Inter {
+    public void method1() {
+        System.out.println("method1");
+    }
+    public void method2() {
+        System.out.println("method2");
+    }
+    //public void func() {
+    //    System.out.println("实现类重写了默认方法");
+    //}
+
+}
+public class Test {
+    public static void main(String[] args) {
+        InterImpl inter = new InterImpl();
+        inter.method1();
+        inter.method2();
+        inter.func();
+    }
+}
+//——————————接口中增加了默认方法，用default修饰，这样不强制要求子类重写，如果重写，要去掉dafault
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 
 
