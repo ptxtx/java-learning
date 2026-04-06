@@ -154,6 +154,49 @@ public class Test1 {
     }
 }
 ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//String的一些常见方法
+public class Test {
 
+    public static void main(String[] args) {
+        //是否包含
+        String str="abcdecg";
+        boolean b=str.contains("abc");
+        System.out.println(b);
+
+        //判断开头结尾
+        //判断str是否以bc为开头
+        boolean b2=str.startsWith("abc");
+        //判断str'是否从1索引开始，以bc开头
+        boolean b3=str.startsWith("bc",1);
+        System.out.println(b2);
+        System.out.println(b3);
+
+        //查找 indexOf(int char)   lastIndexOf(int ch)
+        int i=str.indexOf(99);//2
+        System.out.println(i);
+        int j=str.lastIndexOf(99);//5
+        System.out.println(j);
+
+        //判断是否为空
+        boolean empty1=str.isEmpty();
+        System.out.println(empty1);
+
+        //转字符数组 toCharArray    字符串转字符数组
+        char[] array=str.toCharArray();
+        System.out.println(array.length);
+
+        //大小写转换 toUpperCase()  toLowerCase()
+        String upper=str.toUpperCase();
+        System.out.println(upper);
+        String lower=str.toLowerCase();
+        System.out.println(lower);
+
+        //去除头尾空格 trim()
+        String str3="   a  b  c    ";
+        String newStr3=str3.trim();
+        System.out.println(newStr3);
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 
