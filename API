@@ -89,3 +89,33 @@ public class Test {
     }}
 ————————————————————————————————————————————————————
 //小练习2
+import java.util.Scanner;
+
+public class exercise {
+    public static void main(String[] args) {
+        //遍历字符串
+//        Scanner sc = new Scanner(System.in);
+//        String str=sc.next();
+//        for(int i=0;i<str.length();i++){
+//            System.out.print(str.charAt(i));
+//        }
+
+
+        //拼接字符串
+        int arr[]={1,2,3};
+        String pin="";//不知道字符串赋值什么
+        pin=pin+"[";
+        for(int i=0;i<arr.length;i++){
+            if(i<2){
+                pin=pin+arr[i];
+                pin=pin+",";
+            }
+            else{pin=pin+arr[i];pin=pin+"]";}
+        }
+        System.out.println(pin);
+    }
+
+
+}
+//————————————————也可以把拼接字符串核心内容写进工具类里 不过要注意：工具类构造方法要私有化，其方法为静态方法public static
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
