@@ -210,3 +210,124 @@ public class Test2 {
     }
 }
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//StringBuilder小练习1
+public class Test1 {
+    public static void main(String[] args) {
+
+
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("请输入一个字符串");
+            String str = sc.next();
+            if (str.equals("拜拜")) {
+                break;
+            } else {
+                StringBuilder builder = new StringBuilder(str);
+                builder.reverse();
+                String res = builder.toString();
+                System.out.println(res);
+            }
+        }
+    }
+}
+//小练习2 以8个字符为一行打印 不足的补0
+public class Test2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        int len = str.length();
+        int lenn=len;
+        int count = 0;
+        while(len/8>=1){
+            String part=str.substring((8*count),8*(count+1));
+            System.out.println(part);
+            count++;
+            len-=8;
+        }
+
+        String left=str.substring(8*count,lenn);//lenn也可以直接用str.length来代替
+        for(int i=0;i<8-(lenn-8*count);i++){
+            left+="0";
+        }
+        System.out.println(left);//也可以用lenn%8来计算余数
+
+
+        //还可以先整体补0再切割
+//        int count=8-lastLineCount;
+//        if(count!=0){
+//           string line= "00000000".substring(0,count); str+=line;
+//        }
+    }
+}
+ ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//小练习3:定义一个任意的字符串，打乱里面的内容
+public class Test3 {
+    public static void main(String[] args) {
+        
+        //字符串是不能发生改变的 那咋办：————————————————————————转成字符数组 就可以改变了   最终再变回字符串
+        String str="abcd";
+        char[]arr=str.toCharArray();
+        Random r=new Random();
+        for(int i=0;i<arr.length;i++){
+            int randomIndex=r.nextInt(arr.length);
+            char temp=arr[i];
+            arr[i]=arr[randomIndex];
+            arr[randomIndex]=temp;
+        }
+        String res=new String(arr);//——————————————————————————根据传入的字符数组创建字符串的函数
+        System.out.println(res);
+    }
+}
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//小练习4————————————————————————————————————————importante————！
+public class Test4 {
+    public static void main(String[] args) {
+        /*
+        定义两个字符串，记录为非负整数，求他们的和
+        注意：需要数据过大，超出int取值范围的情况
+         */
+        String str1="9999";
+        String str2="99999";
+
+        int len=str1.length()>=str2.length()?str1.length():str2.length();
+        int arr1[]=copyDate(str1,len);
+        int arr2[]=copyDate(str2,len);
+
+        int arr3[]=new int[len+1];//存储最终结果
+        int jinwei=0;
+        for(int i=len-1;i>=0;i--){
+            int temp=arr1[i]+arr2[i]+jinwei;
+            arr3[i+1]=temp%10;//i+1!!!!!!!  因为第三个数组的长度长1
+            jinwei=temp/10;
+
+        }
+        arr3[0]=jinwei;
+       StringBuilder builder=new StringBuilder();
+
+           if(jinwei==0){}
+           else{builder.append(arr3[0]);}
+        for(int i=1;i<arr3.length;i++){
+            builder.append(arr3[i]);
+       }
+       System.out.println(builder.toString());
+
+    }
+    public static int[] copyDate(String str,int len){
+        int [] arr=new int[len];
+        int lenn=arr.length-1;
+        //——————————！！！把字符串中的数据放入数组中要倒着遍历（不然就是最高位与最低位做加法了）
+        for(int i=str.length()-1;i>=0;i--){
+            char ch=str.charAt(i);
+            arr[lenn--]=ch-'0';
+
+        }
+        return arr;
+    }
+}
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
+
+
