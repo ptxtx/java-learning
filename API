@@ -119,3 +119,41 @@ public class exercise {
 }
 //————————————————也可以把拼接字符串核心内容写进工具类里 不过要注意：工具类构造方法要私有化，其方法为静态方法public static
 ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//小练习3 replace方法
+public class Test1 {
+    //数据脱敏
+    public static void main(String[] args) {
+//        String str1="abcdefg";
+//        String strsub=str1.substring(1,5);//左闭右开
+//        System.out.println(strsub);
+//        String strsub2=str1.substring(2);
+//        System.out.println(strsub2);
+
+        //正式练习：
+        String username="白三个深入骨髓";
+        String strsub1=username.substring(0,1);
+        strsub1+="***";
+        System.out.println(strsub1);
+        //或者用charAt 返回值为char！
+
+
+
+        //过滤游戏中骂人的脏话
+        String str2="你打的好菜呀，TMD";
+        String newstr2=str2.replace("TMD","***");
+        System.out.println(newstr2);
+
+          //定义敏感词库
+        String[]arr={"TMD","sb","NMD"};
+        Scanner sc=new Scanner(System.in);
+        String str3=sc.next();
+        for(int i=0;i<arr.length;i++){
+           str3= str3.replace(arr[i],"***");
+        }
+        System.out.println(str3);
+    }
+}
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
