@@ -383,7 +383,57 @@ public class Test1 {
 
     }
 }
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//small exercise
+import java.util.ArrayList;
 
+public class Exercise1 {
+    public static void main(String[] args) {
+        //基本数据对应包装类
+        //byte-Byte short-Short int-Integer long-Long float-Float
+        //double-Double char-Character boolean-Boolean
+
+        ArrayList<Integer> list=new ArrayList<>();
+        list.add(1);
+        list.add(2);
+
+        for(int i=0;i<list.size();i++){
+           Integer value=list.get(i);
+            System.out.println(value);
+        }
+
+    }
+}
+
+
+//exercise2
+public class Exercise2 {
+    public static void main(String[] args) {
+        ArrayList<Student> list=new ArrayList<Student>();
+        Student s1=new Student("001","zhangsan",19);
+        Student s2=new Student("002","lisi",20);
+        Student s3=new Student("003","wangwu",17);
+
+        list.add(s1);
+        list.add(s2);
+        list.add(s3);
+        int index=findStudent(list,"002");
+        System.out.println(index);
+
+    }
+    //定义一个方法，根据id查找学生信息
+    public static int findStudent(ArrayList<Student> list,String id){
+        for(int i=0;i<list.size();i++){
+            Student temp=list.get(i);
+            if(temp.getId().equals(id)){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 
 
