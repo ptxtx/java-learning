@@ -325,6 +325,64 @@ public class Test4 {
     }
 }
 ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//——————————ArrayList基本使用（增删改查）
+import java.util.ArrayList;
+
+public class Test1 {
+    public static void main(String[] args) {
+        //ArrayList list = new ArrayList();//不知道存储的是哪个类型的数据
+        //如果没有限定，此时集合里面可以存储任意类型的数据
+        //泛型：限定集合中的数据类型 <数据类型>
+        //list.add("abc");
+       // list.add(new Student("zhangsan",18));
+        // list.add(new Cat("catt",18));
+
+
+        //用泛型去限定集合中能存储什么数据
+        ArrayList<String> list=new ArrayList<>();
+
+        //添加数据
+        //true：添加成功 false：添加失败
+        //此时add方法在任意情况下，都会添加成功，永远不会失败,忽略返回值即可
+        //在集合中无法直接添加基本数据类型 ，如果一定要添加，那么可以转成相应的包装类
+        //boolean  res=list.add("aaa");
+        list.add("aaa");//将数据添加到末尾
+        list.add("bbb");
+        list.add("ccc");
+        System.out.println(list);
+        //System.out.println(res);
+        String s=list.get(0);
+
+        //把qqq添加到0索引位置
+        list.add(0,"qqq");
+        System.out.println(list);
+        //如果集合长度为3.那么下面方法要添加的索引范围只能是0～3 如果超出范围，则报错
+
+
+        //boolean remove(E e)   根据元素删除 删除成功返回true 失败返回false
+        //E remove(int index)   根据索引删除 返回被删除的元素
+        boolean res2=list.remove("qqq");
+        System.out.println(res2);
+       String res3=list.remove(0);
+       System.out.println(res3);
+       System.out.println(list);
+
+       //E set(int index,E e)   将指定位置的数据，修改为新元素，把被替换的元素返回
+        String res4=list.set(0,"zzz");
+        System.out.println(res4);
+        System.out.println(list);
+
+        //查询    E get(int index)
+        String res5=list.get(0);
+        System.out.println(res5);
+
+        //遍历 get+size
+        for(int i=0;i<list.size();i++){
+            System.out.println(list.get(i));
+        }
+
+    }
+}
 
 
 
