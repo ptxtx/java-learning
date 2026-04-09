@@ -601,7 +601,7 @@ public class Test1 {
         return true;
     }
 }
-//——————————正则表达式练习
+//——————————正则表达式练习1
 public class Exercise {
     public static void main(String[] args) {
         String telephone="13350878940";
@@ -615,6 +615,19 @@ public class Exercise {
         System.out.println(email_check);
     }
 }
+//——————————正则表达式练习2
+public class Exercise2 {
+    public static void main(String[] args) {
+        String regix1="\\w{4,16}";
+        String id="5101152006070200";
+        System.out.println(id.matches(regix1));
+
+        String regix2="[1-9]\\d{16}[Xx0-9]{1}";
+        String id2="51011520060702003x";
+        System.out.println(id2.matches(regix2));
+    }
+}
+
 ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 
