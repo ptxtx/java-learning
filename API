@@ -520,3 +520,59 @@ public class User implements Cloneable{
 }
 
 ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//——————BigInteger构造方法(三种常见）
+import java.math.BigInteger;
+import java.util.Random;
+
+public class Test1 {
+    public static void main(String[] args) {
+        BigInteger b=new BigInteger(4,new Random());
+        System.out.println(b);
+
+        BigInteger b2=new BigInteger("10000");
+        System.out.println(b2);
+
+
+        BigInteger bigInteger = BigInteger.valueOf(100);
+        System.out.println(bigInteger);
+
+    }
+}
+
+//——————BigInteger成员方法
+public class Test2 {
+    public static void main(String[] args) {
+        BigInteger bd1=BigInteger.valueOf(10);
+        BigInteger bd2=BigInteger.valueOf(4);
+
+        BigInteger bd3=bd1.add(bd2);
+        System.out.println(bd3);
+
+        BigInteger[] bd4=bd1.divideAndRemainder(bd2);
+        for(int i=0;i<bd4.length;i++){
+            System.out.println(bd4[i]);
+        }
+
+        boolean equals = bd1.equals(bd2);
+        System.out.println(equals);
+
+        BigInteger bd5=bd1.pow(2);
+        System.out.println(bd5);
+
+        BigInteger bd6=bd1.max(bd2);
+        System.out.println(bd6);
+
+        //返回int型整数。  如果想long型 则longValue
+        int value=bd1.intValue();
+        System.out.println(value);
+
+    }
+}
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
+
+
+
