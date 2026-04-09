@@ -824,5 +824,53 @@ public class Test2 {
         System.out.println(str2);
     }
 }
+
+//————————————SimpleDateFormat练习1
+public class Exercise2 {
+    public static void main(String[] args) throws ParseException {
+        /*
+        需求：
+       你的出生年月日为2006-07-02
+       请用字符串表示这个数据，并将其转换为2006年7月2日
+         */
+        String str="2006-07-02";
+        //解析
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        Date parse = sdf.parse(str);
+        //格式化
+        SimpleDateFormat sdf1=new SimpleDateFormat("yyyy年MM月dd日");
+        String format = sdf1.format(parse);
+        System.out.println(format);
+    }
+}
+//————————————SimpleDateFormat练习2
+public class Exercise3 {
+    public static void main(String[] args) throws ParseException {
+        String start="2023年11月11日 0:0:0";
+        String end="2023年11月11日 0:10:0";
+        String order="2023年11月11日 0:01:00";
+
+        //解析上面的时间 得到Date对象
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+        Date Start = sdf.parse(start);
+        Date endDate = sdf.parse(end);
+        Date orderdate = sdf.parse(order);
+
+        long starttime = Start.getTime();
+        long endtime = endDate.getTime();
+        long ordertime = orderdate.getTime();
+
+        if(ordertime>=starttime&&ordertime<=endtime){
+            System.out.println("参加秒杀活动成功");
+        }
+        else{
+            System.out.println("参加秒杀活动失败");
+        }
+
+    }
+}
+
+
+
 —————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— 
 
