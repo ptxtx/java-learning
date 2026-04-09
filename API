@@ -453,7 +453,45 @@ public class Exercise {
     }
 }
 ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//API-Runtime
+import java.io.IOException;
 
+public class Test {
+    public static void main(String[] args) throws IOException {
+        Runtime r1=Runtime.getRuntime();
+        Runtime r2=Runtime.getRuntime();
 
+        //r1.exit(0);
+        System.out.println(r1.availableProcessors());
+        System.out.println(r1.maxMemory());
+        System.out.println(r1.freeMemory()/1024/1024);
+        r1.exec("shutdown -a");
+    }
+}
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//API-Object-CLone
+public class User implements Cloneable{
+    private String username;
+    private String password;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    public User() {}
+    
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        // 直接调用父类 Object 的 clone 方法来实现浅拷贝
+        return super.clone();
+    }
+}
+public class Test {
+    public static void main(String[] args) throws CloneNotSupportedException {
+        User u1=new User("zhangsan","123456");
+        User u2=(User)u1.clone();
+        System.out.println(u1);
+        System.out.println(u2);
+    }
 
-
+}
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
