@@ -629,9 +629,170 @@ public class Exercise2 {
 }
 
 ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//爬虫（从一段文字中提取信息）
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class pachong {
+    public static void main(String[] args) {
+        String str="Java自2006年问世以来，用Java8和Java11，"+"因为这两个是长期。。。是Java17，相信。";
+        //Pattern:表示正则表达式
+        //Matcher：文本匹配器，作用按照正则表达式的规则去读取字符串，从头开始读取
+        Pattern p = Pattern.compile("Java\\d{0,2}");
+        Matcher m = p.matcher(str);
+        while(m.find()){
+            System.out.println(m.group());
+        }
+
+
+    }
+    public static void method1(String str){
+        Pattern p = Pattern.compile("Java\\d{0,2}");
+        Matcher m= p.matcher(str);
+        boolean b=m.find();//如果有，返回true。在底层记录子串的起始索引和结束索引+1
+
+        //————————————group方法会根据find方法记录的索引进行字符串的截取
+        String s1=m.group();
+        System.out.println(s1);
+
+        b=m.find();//读取到第二个满足要求的子串，方法会继续返回true
+        String s2=m.group();
+        System.out.println(s2);
+    }
+}
+//————————————————————————--带条件爬取
+        String regex1="Java(?=8|11|17)";//获取前半部分
+        String regex2="Java(?:8|11|17)";//获取所有
+        String regex3="Java(?!8|11|17)";//获取除了8 11 17的所有
+        Pattern p=Pattern.compile(regex1);
+        Matcher m=p.matcher(str);
+        while(m.find()){
+            System.out.println(m.group());
+        }
+//————————————————————————贪婪爬取与非贪婪爬取
+        String regex="ab+?";//非贪婪
+        String regex2="ab+";//贪婪
+        Pattern pattern=Pattern.compile(regex);
+        Matcher matcher=pattern.matcher(str);
+        while(matcher.find()){
+            System.out.println(matcher.group());
+        }
+//——————————————————字符串的切割与替换
+public class pachongexercise2 {
+    public static void main(String[] args) {
+        String s="张静怡sgnsokfbvsfkobns12322元梓童sdjbnfkbsvfks213王璐";
+        //要求1:把名字之间的字母替换为vs
+        //要求2:把字符串中的三个名字切割出来
+        String vs = s.replaceAll("[\\w&&[^_]]+", "vs");
+        System.out.println(vs);
+
+        String[] split = s.split("[\\w&&[^_]]+");
+        for(int i=0;i<split.length;i++){
+            System.out.println(split[i]);
+        }
+    }
+}
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//——————分组
+public class fenzu {
+    public static void main(String[] args) {
+        //需求
+        //1.判断一个字符串的开始字符和结束字符是否一致？只考虑字符
+        // \\组号：表示把第X组的内容拿出来再用一次
+        String regex1="(.).+\\1";
+        System.out.println("a123a".matches(regex1));
+        System.out.println("b456b".matches(regex1));
+        System.out.println("17891".matches(regex1));
+        System.out.println("a123b".matches(regex1));
+
+
+        System.out.println("------------");
+
+        //2.判断一个字符串的开始字符和结束字符是否一致？可以有多个字符
+        String regex2="(.+).+\\1";
+        System.out.println("aac123aac".matches(regex2));
+        System.out.println("b456b".matches(regex2));
+        System.out.println("123789123".matches(regex2));
+        System.out.println("abv123abc".matches(regex2));
+
+        System.out.println("------------");
+        //3.判断一个字符串的开始字符和结束字符是否一致？开始部分内部每个字符也需要一致
+        //String regex3="((.)\\2*).+\\1";
+        String regex3="((.)*).+\\1";//这两种都可以
+
+        System.out.println("aaa123aaa".matches(regex2));
+        System.out.println("b456b".matches(regex2));
+        System.out.println("111789111".matches(regex2));
+        System.out.println("abv123abc".matches(regex2));
+    }
+}
+//————————————————捕获分组
+public class fenzu2 {
+    public static void main(String[] args) {
+        //口吃替换
+        /*
+        需求：
+        将字符串“我要学变变变变橙橙橙橙” 替换为”我要学变橙“
+         */
+
+        String str="我要学变变变变橙橙橙橙";
+        String s = str.replaceAll("(.)\\1+", "$1");
+        System.out.println(s);
+    }
+}
+//——————————非捕获分组
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//Date类
+import java.util.Date;
+
+public class Test1 {
+    public static void main(String[] args) {
+        Date date = new Date();
+        System.out.println(date);
+
+        Date date1 = new Date(0L);//形参为long类型
+        System.out.println(date1);
+
+        date1.setTime(1000L);//过了1000ms
+        System.out.println(date1);
+
+        long l = date1.getTime();
+        System.out.println(l);
+
+    }
+}
+//————————————Date类小练习
+public class Exercise1 {
+    public static void main(String[] args) {
+        /*
+        需求1:打印时间原点开始一年之后的时间
+        需求2:
+        定义任意两个Date对象，你比较一下哪个时间在前，哪个时间在后
+         */
+        Date date = new Date(0L);
+        long time = date.getTime();
+
+        time+=1000L*60*60*24*365;
+        date.setTime(time);
+        System.out.println(date);
 
 
 
-
-
+        //需求2
+        Random random = new Random();
+        Date date1 = new Date(Math.abs(random.nextInt()));
+        Date date2 = new Date(Math.abs(random.nextInt()));
+        System.out.println(date1);
+        System.out.println(date2);
+        long time1 = date1.getTime();//————————————————要转成基本数据类型才能直接比较！！！
+        long time2 = date2.getTime();
+        if(time1>time2){
+            System.out.println("第一个时间在前");
+        }
+        else{
+            System.out.println("第二个时间在前");
+        }
+    }
+}
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
