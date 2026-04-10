@@ -869,8 +869,48 @@ public class Exercise3 {
 
     }
 }
-
-
-
 —————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— 
+//——————————Calendar
+package api.Datedemo;
 
+import java.util.Calendar;
+import java.util.Date;
+
+public class CalendarTest {
+    public static void main(String[] args) {
+        //Calendar是抽象类！不能直接new
+
+        //1.获取日历对象
+        //把时间中的纪元、年、月、日。。。等都放到一个数组中
+        /*
+        0:纪元
+        1:年
+        2:月
+        3:一年中的第几周
+        4:一个月中的第几周
+        5:一个月中的第几天（日期）
+        。。。。直到16
+         */
+        Calendar c=Calendar.getInstance();
+
+        //2.修改一下日历代表时间
+        Date date=new Date();
+        c.setTime(date);
+
+        //Java中把数字都对应了常量
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int week=c.get(Calendar.DAY_OF_WEEK);
+        System.out.println(year+","+month+","+day+","+week);//2026,3,10,6
+
+        c.set(Calendar.YEAR,2027);
+        int year1=c.get(Calendar.YEAR);
+        System.out.println(year1+","+month+","+day+","+week);//2027,3,10,6
+
+        c.add(Calendar.DAY_OF_MONTH,1);
+        int day2=c.get(Calendar.DAY_OF_MONTH);
+        System.out.println(year1+","+month+","+day2+","+week);//2027,3,11,6
+    }
+}
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
