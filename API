@@ -913,4 +913,24 @@ public class CalendarTest {
         System.out.println(year1+","+month+","+day2+","+week);//2027,3,11,6
     }
 }
+
+//————JDK8新增
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class JDK8Test {
+    public static void main(String[] args) {
+        //获取时间对象
+        ZonedDateTime zonedDateTime = Instant.now().atZone(ZoneId.of("Asia/Shanghai"));
+        
+        //解析/格式化器
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        
+        //格式化
+        System.out.println(zonedDateTime.format(formatter));
+    }
+}
+
 ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
