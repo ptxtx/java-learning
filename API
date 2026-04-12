@@ -932,5 +932,20 @@ public class JDK8Test {
         System.out.println(zonedDateTime.format(formatter));
     }
 }
+//——————————LocalDate类LocalTime类（更好用）
+import java.time.LocalDate;
+
+public class JDK8Test2 {
+    public static void main(String[] args) {
+        LocalDate localDate = LocalDate.now();
+        int year=localDate.getYear();
+        int month=localDate.getMonthValue();
+        int day=localDate.getDayOfMonth();
+        System.out.println(year);
+        System.out.println(month);
+        System.out.println(day);
+        System.out.println(localDate);
+    }
+}
 
 ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
