@@ -1,0 +1,242 @@
+//二分查找（前提：必须有序）
+package CommonAlgorithm;
+
+import java.util.Scanner;
+
+public class binarySearch {
+    public static void main(String[] args) {
+        int[]arr={7,23,79,81,127,147};
+        System.out.println(binarySearc(arr,127));
+    }
+    public static int binarySearc(int[] arr,int num){
+        int min=0;
+        int max=arr.length-1;
+        while(true){
+            if(min>max){
+                return -1;
+            }
+            int mid=(min+max)/2;
+            if(arr[mid]==num){
+                return mid;
+            }
+            else if(arr[mid]<num){
+                min=mid+1;
+            }
+            else{
+                max=mid-1;
+            }
+
+        }
+
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//分块查找（很一般的查找方法）
+package CommonAlgorithm;
+
+public class blockSearch {
+    public static void main(String[] args) {
+        int[] arr={16,5,9,12,21,18,
+                32,23,37,26,45,34,
+                50,48,61,52,73,66};
+        //1.分块 17/4
+        Block b1=new Block(21,0,5);
+        Block b2=new Block(45,6,11);
+        Block b3=new Block(73,12,17);
+        Block[] blockArr={b1,b2,b3};
+        int key=37;
+
+        int index=getIndex(blockArr,arr,key);
+        System.out.println(index);
+
+    }
+    public static int getIndex(Block[] blockArr,int[] arr,int key){
+        int indexBlock=findIndex(blockArr,key);
+        if(indexBlock==-1){
+            return -1;
+        }
+        int startIndex=blockArr[indexBlock].getStartIndex();
+        int endIndex=blockArr[indexBlock].getEndIndex();
+
+        for(int i=startIndex;i<=endIndex;i++){
+            if(arr[i]==key){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public static int findIndex(Block[] blockArr,int key){
+        for(int i=0;i<blockArr.length;i++){
+            if(key<=blockArr[i].getMax()){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+class Block{
+    private int max;
+    private int startIndex;
+    private int endIndex;
+    public Block(int max,int startIndex,int endIndex){
+        this.max=max;
+        this.startIndex=startIndex;
+        this.endIndex=endIndex;
+    }
+    public int getMax() {
+        return max;
+    }
+    public void setMax(int max) {
+        this.max = max;
+    }
+    public int getStartIndex() {
+        return startIndex;
+    }
+    public void setStartIndex(int startIndex) {
+        this.startIndex = startIndex;
+    }
+    public int getEndIndex() {
+        return endIndex;
+    }
+    public void setEndIndex(int endIndex) {
+        this.endIndex = endIndex;
+    }
+
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//冒泡排序
+package CommonAlgorithm.SortCode;
+
+public class BubbleSort {
+    public static void main(String[] args) {
+        int []arr={2,4,5,3,6};
+        bubbleSort(arr);
+        for(int i=0;i<arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+    public static void bubbleSort(int[] arr){
+        for(int i=0;i<arr.length-1;i++){//n-1轮就够了
+            for(int j=0;j<arr.length-1-i;j++){
+                //每一轮中如何比较数据
+                //-1:为了防止数组越界
+                //-i：提高效率，每一轮执行的次数比上一轮少一次
+                if(arr[j]>arr[j+1]){
+                    int temp=arr[j];
+                    arr[j]=arr[j+1];
+                    arr[j+1]=temp;
+                }
+            }
+        }
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//选择排序
+package CommonAlgorithm.SortCode;
+
+public class selectionSort {
+    public static void main(String[] args) {
+        int[] arr = {2, 4, 5, 3, 6};
+        selectionsort(arr);
+        for(int i=0;i<arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+    public static void selectionsort(int[] arr){
+        for(int i=0;i<arr.length-1;i++){//n-1轮即可
+            for(int j=i+1;j<arr.length;j++){
+                //+1:从跟后面的比，不用跟自己比较
+                if(arr[i]>arr[j]){
+                    int temp=arr[i];
+                    arr[i]=arr[j];
+                    arr[j]=temp;
+                }
+            }
+        }
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//插入排序
+package CommonAlgorithm.SortCode;
+
+public class insertionSort {
+    public static void main(String args[]){
+        int[]arr={3,44,38,5,47,15,36,26,27,2,46,4,19,50,48};
+
+        //1.找到无序的那组数据从哪个索引开始
+        int startIndex=-1;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]>arr[i+1]){
+                startIndex=i+1;
+                break;
+            }
+        }
+
+        //2.遍历从startINdex开始到最后一个元素，依次得到无序组数据中的每一个元素
+        for(int i=startIndex;i<arr.length;i++){
+            int j=i;
+            while(j>0&&arr[j]<arr[j-1]){
+                //交换位置
+                int temp=arr[j];
+                arr[j]=arr[j-1];
+                arr[j-1]=temp;
+                j--;
+            }
+        }
+        for(int i=0;i<arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//快速排序
+package CommonAlgorithm.SortCode;
+
+public class quickSort {
+    public static void main(String args[]){
+        int[] arr={6,1,2,7,9,3,4,5,10,8};
+        quicksort(arr,0,arr.length-1);
+        for(int i=0;i<arr.length;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+
+    public static void quicksort(int[] arr,int i,int j){
+        int start=i;
+        int end=j;
+        if(start>end){
+            return;
+        }
+
+        int baseNumber=arr[i];
+        while(start!=end){
+            //利用end从后往前找 比基准数小的数 利用start从前往后找比基准数大的数
+            while(true){
+                if(end<=start||arr[end]<baseNumber){
+                    break;
+                }
+                end--;
+            }
+            while(true){
+                if(start>=end||arr[start]>baseNumber){
+                    break;
+                }
+                start++;
+            }
+
+            int temp=arr[start];
+            arr[start]=arr[end];
+            arr[end]=temp;
+        }
+        //当start==end结束循环 找到了基准数在数组中应存入的位置
+        int temp=arr[i];
+        arr[i]=arr[start];
+        arr[start]=temp;
+        quicksort(arr,i,start-1);
+        quicksort(arr,start+1,j);
+
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
