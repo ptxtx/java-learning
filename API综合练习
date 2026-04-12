@@ -1,0 +1,136 @@
+//Exercise1
+package api.ExerciseFinal;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Exercise1 {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        Scanner input = new Scanner(System.in);
+        while(true){
+            String numStr=input.nextLine();
+            int num = Integer.parseInt(numStr);
+            if(num<1||num>100){
+                System.out.println("Invalid input");
+                continue;
+            }
+            list.add(num);//自动装箱 int自动转integer装入集合
+            if(getSum(list)>200){
+                System.out.println("集合中所有的数据和已经满足要求");
+                break;
+            }
+        }
+        for(int i=0;i<list.size();i++){
+            System.out.print(list.get(i)+" ");
+        }
+    }
+    public static int getSum(ArrayList<Integer> list){
+        int sum=0;
+        for(int i=0;i<list.size();i++){
+            sum+=list.get(i);
+        }
+        return sum;
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+package api.ExerciseFinal;
+
+public class Exercise2 {
+    public static void main(String[] args) {
+        /*
+        自己实现parseint方法的效果，将字符串形式的数据转为整数
+         */
+        String str="123456";
+
+        String regex="[1-9]\\d{0,9}";
+        if(!str.matches(regex)){//先过滤异常数据
+            System.out.println("数据格式有误");
+        }
+        else{
+            System.out.println("数据格式正确");
+            int num=0;
+            for(int i=0;i<str.length();i++){
+                int c = str.charAt(i)-'0';
+                num=num*10+c;
+            }
+            System.out.println(num);
+
+        }
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//Exercise3
+package api.ExerciseFinal;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+
+public class Exercise3 {
+    public static void main(String[] args) throws ParseException {
+        /*
+        请用代码实现计算你活了多少天，用JDK7 JDK8两种方式完成
+         */
+
+        //JDK7
+        long now = System.currentTimeMillis();
+
+        String birthday="2006-07-02";
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");//SimpleDateFormat解析String
+        Date date=sdf.parse(birthday);
+        long birthdayTime=date.getTime();
+
+        long sub=now-birthdayTime;
+        System.out.println(sub/1000/60/60/24);
+
+
+
+        //JDK8
+        LocalDate ld1=LocalDate.of(2006,7,2);
+        LocalDate now1 = LocalDate.now();
+        long days = ChronoUnit.DAYS.between(ld1,now1);
+        System.out.println(days);
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+package api.ExerciseFinal;
+
+import java.time.LocalDate;
+import java.util.Calendar;
+
+public class Exercise4 {
+    public static void main(String[] args) {
+        /*
+        判断任意一个年份是闰年还是平年
+        提示：
+            二月有29天是闰年
+            一年有366天是闰年
+         */
+
+        //JDK7
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(2000,2,1);//0~11
+//        cal.add(Calendar.DAY_OF_MONTH,-1);//往前减一天
+//        int day=cal.get(Calendar.DAY_OF_MONTH);
+//        System.out.println(day);
+        Calendar cal = Calendar.getInstance();
+        cal.set(2001,0,1);//0~11
+        cal.add(Calendar.DAY_OF_MONTH,-1);//往前减一天
+        int day=cal.get(Calendar.DAY_OF_YEAR);
+        System.out.println(day);//两种方法
+
+
+
+        //JDK8
+        LocalDate localDate = LocalDate.of(2000, 3, 1);
+        LocalDate localDate1 = localDate.minusDays(1);
+        System.out.println(localDate1);
+
+
+        //———————————————————————————————————————System.out.println(localDate.isLeapYear());//这个可以直接判断！
+    }
+
+}
