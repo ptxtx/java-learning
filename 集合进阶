@@ -1,0 +1,63 @@
+//迭代器遍历
+package MyCollection;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+public class iterator {
+    public static void main(String[] args) {
+        Collection collection=new ArrayList();
+        collection.add("aa");
+        collection.add("bb");
+        collection.add("cc");
+        collection.add("dd");
+
+        Iterator it=collection.iterator();
+        while(it.hasNext()){
+            System.out.println(it.next());
+        }
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//增强for遍历
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class forr {
+    public static void main(String[] args) {
+        Collection<String> c=new ArrayList<>();
+        c.add("aa");
+        c.add("bb");
+        c.add("cc");
+
+        for(String str:c){
+            System.out.println(str);
+        }
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//Lambda遍历
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.function.Consumer;
+
+public class LambdaTraversal {
+    public static void main(String[] args) {
+        Collection collection = new ArrayList();
+        collection.add("a");
+        collection.add("b");
+        collection.add("c");
+
+//        collection.forEach(new Consumer<String>(){
+//            @Override
+//            public void accept(String s) {
+//                System.out.println(s);
+//            }
+//        });
+        
+        collection.forEach(s->System.out.println(s));
+
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
