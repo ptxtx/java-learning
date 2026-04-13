@@ -238,5 +238,65 @@ public class quickSort {
     }
 }
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//arrays-API sort可以实现quicksort
+import java.util.Arrays;
+import java.util.Comparator;
 
+public class Arraydemo {
+    public static void main(String []args){
+        Integer[] arr={2,3,1,5,6,7,8,4,9};
+
+
+        //底层原理 利用插入排序+二分查找进行排序
+        //默认把0索引的数据当作是有序的序列，1索引到最后认为无序
+        Arrays.sort(arr,new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                //o1: 表示在无序序列中，遍历得到的每一个元素
+                //o2:有序序列中的元素
+
+                //返回值：
+                //负数：表示当前要插入的元素是小的，放在前面 正数：表示当前要插入的元素是大的，放在后面
+                //0:也会放在后面
+
+                System.out.println("o1:"+o1+",o2:"+o2);
+                return o1-o2;
+            }
+        });
+
+        //匿名内部类可以简化书写 Lambda表达式
+        //Arrays.sort(arr,(Integer o1,Integer o2)->{return o1-o2});
+
+        //简单理解：o1-o2:升序排   o2-o1:降序排列
+        System.out.println(Arrays.toString(arr));
+    }
+}
+
+
+//引入Lambda表达式
+package CommonAlgorithm.SortCode;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class LambdaDemo {
+    public static void main(String[] args) {
+        /*
+        定义数组并存储一些字符串，利用Arrays中的sort方法进行排序
+        要求：
+            按照字符串的 长度进行排序 短的在前
+         */
+        String[] arr={"a","aaaa","aa","aaa"};
+//        Arrays.sort(arr,new Comparator<String>() {
+//            @Override
+//            public int compare(String o1, String o2) {
+//                return(o1.length()-o2.length());
+//            }
+//        });
+
+        Arrays.sort(arr,( o1, o2)->o1.length()-o2.length());
+        System.out.println(Arrays.toString(arr));
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
