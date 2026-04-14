@@ -61,3 +61,93 @@ public class LambdaTraversal {
     }
 }
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//List中的常见方法
+package MyList;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListDemo1 {
+    public static void main(String[] args) {
+        //List也是接口
+        List<String> list=new ArrayList<>();
+
+        list.add("a");
+        list.add("b");
+        list.add("c");
+
+        System.out.println(list);
+        list.add(2,"d");//原来索引上的元素依次往后移
+        System.out.println(list);
+
+        String remove = list.remove(0);
+        System.out.println(remove);
+        System.out.println(list);
+
+        String qqq = list.set(0, "qqq");//返回被修改的元素
+        System.out.println(list);
+        System.out.println(qqq);
+
+        String s = list.get(2);
+        System.out.println(s);
+
+
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//List五种遍历方式
+package MyList;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+public class ListDemo2 {
+    public static void main(String[] args) {
+        List<String> list=new ArrayList<>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+
+//迭代器
+        Iterator<String> it=list.iterator();
+        while(it.hasNext()){
+            System.out.println(it.next());
+        }
+
+        //增强for
+        for(String str:list){
+            System.out.println(str);
+        }
+
+        //LAmbda
+        //forEach 方法的底层就是一个循环遍历，依次得到集合中的每一个元素 并把每一个元素传递给下面的accept方法
+        list.forEach(s->System.out.println(s));
+
+        /*
+        list.forEach(new Consumer<String>(){
+        public void accept(String s){
+        }
+        }
+         */
+
+        //普通for
+        for(int i=0;i<list.size();i++){
+            System.out.println(list.get(i));
+        }
+
+        //列表迭代器
+        //额外：遍历过程中可以添加元素
+        ListIterator<String> stringListIterator = list.listIterator();
+        while(stringListIterator.hasNext()){
+            String str=stringListIterator.next();
+            if("b".equals(str)){
+                stringListIterator.add("1234455565");
+            }
+
+        }
+        System.out.println(list);
+
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
