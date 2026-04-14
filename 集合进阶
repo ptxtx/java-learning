@@ -150,4 +150,82 @@ public class ListDemo2 {
     }
 }
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//泛型类
+public class GenericsDemo1 {
+    public static void main(String[] args) {
+        MyArrayList<Integer> list = new MyArrayList<>();
+        list.add(123);
+        list.add(456);
+        list.add(789);
+
+        int i=list.get(1);
+        System.out.println(i);
+
+        System.out.println(list);
+    }
+}
+public class MyArrayList<E> {
+    Object[] obj=new Object[10];
+    int size;
+    public boolean add(E e){
+        obj[size]=e;
+        size++;
+        return true;
+    }
+    public E get(int index){
+        return (E)obj[index];//这里有一个强制类型转换
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.toString(obj);
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//泛型方法
+import java.util.ArrayList;
+
+public class ListUtil {
+    public static<T> void addAll(ArrayList<T> list,T t1,T t2,T t3){
+        list.add(t1);
+        list.add(t2);
+        list.add(t3);
+        
+
+
+    }
+    //T...t
+    //for(T element:t){list.add(element);}
+}
+public class GenericsDemo2 {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<String>();
+        ListUtil.addAll(list, "a", "b", "c");
+        System.out.println(list);
+
+        ArrayList<Integer> list2=new ArrayList<>();
+        ListUtil.addAll(list2, 1, 2, 3);
+        System.out.println(list2);
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//泛型接口
+public class MyArrayList2 implements List<String> {}//List<E>
+public class GenericsDemo3 {
+    public static void main(String[] args) {
+        MyArrayList2 list = new MyArrayList2();//MyArrayList<String> list=...
+        list.add("a");
+        list.add("b");
+        list.add("c");
+
+        System.out.println(list);
+
+    }
+}
+//两种泛型接口的实现方式如上
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
 
