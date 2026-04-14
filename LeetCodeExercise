@@ -299,4 +299,56 @@ public class CalculateProduct {
         sc.close();
     }
 //重点是弄懂：i位与j位相乘 （个位）结果落在第i+j+1位上，其进位等信息落在第i+j位上
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//l136
+//找出只出现一次的数组（其他数字都出现两次）
+public class l136 {
+    public static void main(String[] args) {
+        int nums[]={1,2,1,2,4};
+        System.out.println(singleNumber(nums));
+
+    }
+    public static int singleNumber(int[] nums) {
+//        int start=0;
+//        int end=nums.length-1;
+//        while(start<end){
+//            if(nums[start])
+//        }
+        int single=0;
+        for(int num:nums){
+            single^=num;
+        }
+        return single;
+    }
+}
+//非常巧妙的运用了异或的性质以及其结合交换律
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//l169 找出众数
+//我自己的想法是先对数组排序 其中间的数一定是众数 但这样的空间复杂度为O(logn) (quicksort)
+//引入投票算法
+public int majorityElement(int[] nums) {
+//        Arrays.sort(nums);
+//        return nums[nums.length/2];
+
+        Integer candidate=null;
+        int count=0;
+        for(int i=0;i<nums.length;i++){
+            if(count==0){
+                candidate=nums[i];
+            }
+            if(nums[i]==candidate){
+                count++;
+            }else{
+                count--;
+            }
+        }
+        return candidate;
+    }
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
+
+
 
