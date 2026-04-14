@@ -224,8 +224,27 @@ public class GenericsDemo3 {
 }
 //两种泛型接口的实现方式如上
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+/泛型的通配符（核心：可以实现类型的限定）
+public class GenericsDemo4 {
+    public static void main(String[] args) {
+        ArrayList<Ye>list1=new ArrayList<Ye>();
+        ArrayList<Fu>list2=new ArrayList<Fu>();
+        ArrayList<Zi>list3=new ArrayList<Zi>();
+        ArrayList<Student> list4=new ArrayList<Student>();
+        method(list1);
+        method(list2);
+        method(list3);
+       // method(list4);//当为?extends Ye   Student不是Ye的继承类 所以不行哦
+    }
+    public static void method(ArrayList<?extends Ye> list){//<?> 就没有限定范围
 
-
+    }
+}
+class Ye{}
+class Fu extends Ye{}
+class Zi extends Fu{}
+class Student{}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 
 
