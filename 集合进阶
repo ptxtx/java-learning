@@ -339,6 +339,51 @@ public class HashSetDemo2 {
     }
 }
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//LinkedHashSet练习
+import java.util.LinkedHashSet;
+public class LinkedHashSetDemo1 {
+    public static void main(String[] args) {
+        Student s1 = new Student("zhangsan",23);
+        Student s2 = new Student("lisi",24);
+        Student s3 = new Student("wangwu",25);
+        Student s4 = new Student("zhangsan",23);
+        LinkedHashSet<Student> lhs = new LinkedHashSet<>();
+
+        System.out.println( lhs.add(s1));
+        System.out.println( lhs.add(s2));
+        System.out.println( lhs.add(s3));
+        System.out.println( lhs.add(s4));
+
+        System.out.println(lhs);//有序了 张三李四王五
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//TreeSetDemo1
+import java.util.Iterator;
+import java.util.TreeSet;
+
+public class TreeSetDemo1 {
+    public static void main(String[] args) {
+        TreeSet<Integer> ts = new TreeSet<>();
+        ts.add(4);
+        ts.add(5);
+        ts.add(1);
+        ts.add(3);
+        ts.add(2);
+        System.out.println(ts);//输出是默认从小到大排序的
+
+        Iterator<Integer> iterator = ts.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        for(int i:ts){
+            System.out.println(i);
+        }
+
+        ts.forEach(i->System.out.println(i));
 
 
-
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
