@@ -529,5 +529,53 @@ public class MapDemo2 {
     }
 }
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//HashMap的一个练习
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+import java.util.Set;
 
+public class MapExercise1 {
+    public static void main(String[] args) {
+        /*
+        80人投票去想去的4个景点
+         */
+        String[] arr={"A","B","C","D"};
+        ArrayList<String> list=new ArrayList<>();
+        Random r=new Random();
+        for(int i=0;i<80;i++){
+            int a=r.nextInt(arr.length);
+            list.add(arr[a]);
+        }
+        HashMap<String,Integer> map=new HashMap<>();
+        for(String name:list){
+            if(map.containsKey(name)){
+                int count=map.get(name);
+                count++;
+                map.put(name,count);
+            }
+            else{
+                map.put(name,1);
+            }
+        }
+        System.out.println(map);
+
+
+        //getMax
+        int max=0;
+        for(String key:map.keySet()){
+            if(map.get(key)>max){
+                max=map.get(key);
+            }
+        }
+        System.out.println(max);
+        //getWHichKeyIsTheMaxValue
+        for(String key:map.keySet()){
+            if(map.get(key)==max){
+                System.out.println(key);
+            }
+        }
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
