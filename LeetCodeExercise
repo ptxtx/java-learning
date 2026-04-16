@@ -345,10 +345,99 @@ public int majorityElement(int[] nums) {
         return candidate;
     }
 ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//l242 有效的字母异位词
+public class l242 {
+    public static void main(String[] args) {}
+    public boolean isAnagram(String s, String t) {
+//        if(s.length()!=t.length()){
+//            return false;
+//        }
+//
+//        int flag=0;
+//        for(int start1=0;start1<s.length();start1++) {
+//            for (int i = 0; i < t.length(); i++) {
+//                if (s.charAt(start1) == t.charAt(i)) {
+//                    flag++;
+//                    break;
+//                }
+//            }
+//        }
+//        if(flag!=s.length()){
+//            return false;
+//        }
+//        else{
+//            return true;
+//        }//忽略了一种 如果只有两种字符 就算数量不同 flag也会=s.length
+
+        //改进1
+//        char[] charArray1 = s.toCharArray();
+//        char[] charArray2 = t.toCharArray();
+//        Arrays.sort(charArray1);
+//        Arrays.sort(charArray2);
+//        if(Arrays.equals(charArray1,charArray2)){
+//            return true;
+//        }
+//        return false;
+
+        Map<Character,Integer> map=new HashMap<>();
+        int[] flag=new int[26];
+        for(int i=0;i<26;i++){
+            flag[i]=0;
+        }
+        for(int i=0;i<s.length();i++){
+            char c=s.charAt(i);
+            map.put(c,flag[c-'a']++);
+        }
+        for(int i=0;i<t.length();i++){
+            char c=t.charAt(i);
+            map.put(c,flag[c-'a']--);
+        }
+
+        for(Character key:map.keySet()){
+            if(flag[key-'a']<0){
+                return false;
+            }
+        }
+        return true;
+
+    }
+}
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//l219 判断相同元素下标差是否小于K
+public class l219 {
+    public static void main(String[] args) {}
+    boolean containsNearbyDuplicate(int[] nums, int k) {
+//        for(int i = 0; i < nums.length; i++){
+//            for(int j = i + 1; j < nums.length; j++){
+//                if(nums[i] == nums[j]&&Math.abs(i-j)<=k){
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
 
 
+//        int i=0;
+//        while(i<nums.length) {
+//            for (int j = 1; j <= k&&i+j<nums.length; j++) {
+//                if (nums[i] == nums[i + j]) return true;
+//            }
+//            i++;
+//        }
+//        return false;
+//        //都耗时太长
 
-
-
+        Map<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            int num=nums[i];
+            if(map.containsKey(num)&&i-map.get(num)<=k){
+                return true;
+            }
+            map.put(num,i);
+        }
+        return false;
+    }
+}
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 
