@@ -387,3 +387,32 @@ public class TreeSetDemo1 {
     }
 }
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//TreeSet第一种排序方式
+import java.util.TreeSet;
+
+public class TreeSetDemo2 {
+    public static void main(String[] args) {
+        Student2 s1 = new Student2("zhangsan",23);
+        Student2 s2 = new Student2("lisi",24);
+        Student2 s3 = new Student2("wangwu",25);
+        Student2 s4 = new Student2("zhaoliu",23);
+
+        TreeSet<Student2> ts = new TreeSet<Student2>();
+        ts.add(s1);
+        ts.add(s2);
+        ts.add(s3);
+        ts.add(s4);
+        System.out.println(ts);//报错 在添加元素时就会报错 因为不知道比较规则，不知道怎么添加。重写后正确
+    }
+}
+（Student2类里的重写方法）
+@Override
+    public int compareTo(Student2 o) {
+        //指定排序规则
+        //按照年龄进行升序排列
+
+        return (this.getAge()-o.getAge())!=0?(this.getAge()-o.getAge()):this.getName().compareTo(o.getName());
+
+    }
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
