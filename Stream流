@@ -1,0 +1,81 @@
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//零散数据使用Stream流----调用Stream.of方法
+import java.util.stream.Stream;
+
+public class StreamDemo4 {
+    public static void main(String[] args) {
+        //一堆零散数据（要求：数据类型相同）
+        Stream.of(1,2,3,4,5).forEach(i->System.out.print(i+" "));
+        System.out.println();
+        Stream.of("a","b","c").forEach(i->System.out.print(i+" "));
+    }
+}
+
+//单列集合使用Stream流-----调用Collections中的默认方法
+package MyStream;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Stream;
+
+public class StreamDemo1 {
+    public static void main(String[] args) {
+        //1.单列集合获取Stream流
+        ArrayList<String> list=new ArrayList<>();
+        Collections.addAll(list,"a","b","c","d","e");
+        Stream<String> stream = list.stream();//获取到一条流水线，并把集合中的数据放到流水线上
+        //使用终结方法打印一下
+        stream.forEach(s->System.out.println(s));//s:流水线上的每一个数据
+
+        //链式编程：
+        list.stream().forEach(s->System.out.print(s+" "));
+        System.out.println();
+    }
+}
+
+//双列集合使用Stream流----无法直接调用 需用键找值或键值对
+import java.util.HashMap;
+
+public class StreamDemo2 {
+    public static void main(String[] args) {
+        //双列集合无法直接使用Stream流
+        //用单列集合转换
+        HashMap<String,Integer> hm =new HashMap<>();
+        hm.put("a",1);
+        hm.put("b",2);
+        hm.put("c",3);
+        hm.put("d",4);
+
+        //第一种方法获取stream流
+        //用keySet先得到所有键
+        hm.keySet().stream().forEach(key->System.out.print(key));
+        System.out.println();
+
+        hm.entrySet().stream().forEach(entry->System.out.println(entry));//这里的entry代表在流水线上的键值对
+
+    }
+}
+
+//数组使用Stream流-----调用数组工具类Arrays中的stream方法
+import java.util.Arrays;
+
+public class StreamDemo3 {
+    public static void main(String[] args) {
+        int []arr={1,2,3,4,5,6,7,8,9,10};
+        String[] arr2={"a","b","c","d"};
+
+
+        //获取Stream流，通过数组的工具类Arrays获取Stream流
+        Arrays.stream(arr).forEach(i->System.out.print(i+" "));
+        System.out.println();
+
+        Arrays.stream(arr2).forEach(i->System.out.print(i+" "));
+    }
+}
+——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
+
+
