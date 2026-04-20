@@ -116,7 +116,33 @@ public class Student {
     }
 }
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//其他调用方式------类名引用成员方法（注意这种方式的局限性，看笔记）
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.function.Function;
 
+public class FunctionDemo5
+{
+    public static void main(String[] args) {
+        /*
+        需求：
+            把字母变成大写
+         */
+        ArrayList<String> list=new ArrayList<>();
+        Collections.addAll(list,"aaa","bbb","ccc");
+//        list.stream().map(new Function<String, String>() {
+//            @Override
+//            public String apply(String s) {
+//                return s.toUpperCase();
+//            }
+//        }).forEach(System.out::println);
+
+        //用类名调用成员方法
+        
+        list.stream().map(String::toUpperCase).forEach(System.out::println);
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 
 
