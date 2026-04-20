@@ -1,0 +1,122 @@
+//引用静态方法
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class FunctionDemo1 {
+    public static void main(String[] args) {
+        /*
+        创建一个数组进行倒序排列
+         */
+        Integer[] arr = {3,5,4,1,6,2};
+        //匿名内部类
+        Arrays.sort(arr,new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2-o1;
+            }
+        });
+        System.out.println(Arrays.toString(arr));//把数组变成字符串再进行打印
+        //Lambda表达式
+        Arrays.sort(arr,(o1,o2)->o2-o1);
+        System.out.println(Arrays.toString(arr));
+
+        //方法引用
+        Arrays.sort(arr,FunctionDemo1::subtraction);//注意这里的引用方式
+    }
+    public static int subtraction(int num1,int num2){
+        return num2-num1;
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//引用成员方法
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class FunctionDemo2 {
+    public static void main(String[] args) {
+        /*
+        需求：
+            集合中有一些数字，要求把他们都变成int类型
+         */
+        ArrayList<String> list=new ArrayList<>();
+        Collections.addAll(list,"1","2","3","4","5","6","7","8","9");
+
+        list.stream().map(Integer::parseInt).forEach(s->System.out.println(s));
+        //new Function的形参、返回值和parseInt的形参、返回值一样 所以可以这样进行方法引用
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//引用构造方法
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class FunctionDemo4 {
+    public static void main(String[] args) {
+        /*
+        需求：
+            集合里面存储年龄和姓名，要求封装成Student对象并收集到List集合中
+         */
+        ArrayList<String> list=new ArrayList<>();
+        Collections.addAll(list,"aaa,15","bbb,16","ccc,17","ddd,18");
+        //将String转换成Student
+//        List<Student> collect = list.stream().map(new Function<String, Student>() {
+//            @Override
+//            public Student apply(String s) {
+//                String[] split = s.split(",");
+//                String name = split[0];
+//                int age = Integer.parseInt(split[1]);
+//                return new Student(name, age);
+//            }
+//        }).collect(Collectors.toList());
+//        System.out.println(collect);
+
+        //用方法引用写
+        //需要在Student类里写一个形参只有String的构造函数才行！！
+        //且引用构造函数时，不用管返回值
+        list.stream().map(Student::new).forEach(System.out::println);
+    }
+}
+package MyFunction;
+
+public class Student {
+    private String name;
+    private int age;
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+——————————————————————————！！！！！！！！！！！！！！！！！
+    public Student(String str) {
+        String[] split = str.split(",");
+        this.name = split[0];
+        this.age = Integer.parseInt(split[1]);
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
