@@ -166,5 +166,61 @@ public class FunctionDemo6 {
     }
 }
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//方法引用练习1
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Exercise1 {
+    public static void main(String[] args) {
+        ArrayList<String> list=new ArrayList<>();
+        Collections.addAll(list,"aaa,15","bbb,16","ccc,17");
+        Stream<Student> studentStream = list.stream().map(new Function<String, Student>() {
+            @Override
+            public Student apply(String str) {
+                return new Student(str.split(",")[0], Integer.parseInt(str.split(",")[1]));
+            }
+        });//此时流中存储的是Student对象
+        //Student[] array = studentStream.toArray(Student[]::new);//再把流中数据转化为数组
+        // System.out.println(Arrays.toString(array));
+        List<Student> collect = studentStream.collect(Collectors.toList());
+        System.out.println(collect);//这里展示了两种方法 分别是存到数组和集合中 具体看要求
+       
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//方法引用练习2
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.function.Function;
+import java.util.function.IntFunction;
+
+public class Exercise2 {
+    public static void main(String[] args) {
+        ArrayList<Student> list=new ArrayList<>();
+        Collections.addAll(list,new Student("zhangsan",22),new Student("lisi",24),new Student("wangwu",25));
+//        String[] array = list.stream().map(new Function<Student, String>() {
+//            @Override
+//            public String apply(Student student) {
+//                return student.getName();
+//            }
+//        }).toArray(String[]::new);
+//        for(String s: array){
+//            System.out.println(s);
+//        }
+
+       // list.stream().map(String::new).toArray(String[]::new);  这里map里面的方法写错了
+        String[] array = list.stream().map(Student::getName).toArray(String[]::new);
+        //这里用的是 类名调用成员方法 可以是空参
+        System.out.println(Arrays.toString(array));
+
+
+    }
+}
 
 
