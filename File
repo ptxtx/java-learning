@@ -1,0 +1,69 @@
+//创建File对象
+import java.io.File;
+
+public class FileDemo1 {
+    public static void main(String[] args) {
+        //根据字符串表示的路径，变成FIle对象
+        String path = "C:\\Users\\Administrator\\Desktop\\a.txt";
+        File f1=new File(path);
+        System.out.println(f1);
+
+        //根据父路径名字符串和子路径名字符串创建文件对象
+        String parent="C:"+File.separator+"Users\\Administrator\\Desktop";
+        String child="a.txt";
+        File f2=new File(parent,child);
+        System.out.println(f2);
+
+
+        //还可以将File对象与String进行拼接
+
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//File的一些成员方法
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class FileDemo2 {
+    public static void main(String[] args) {
+
+        File f1=new File("/Users/ptx/Desktop/未命名文件夹/a.txt");
+        System.out.println(f1.exists());//是否存在
+        System.out.println(f1.isFile());//是否是文件
+        System.out.println(f1.isDirectory());//是否是文件夹
+
+        File f2=new File("/Users/ptx/Desktop/未命名文件夹");
+        System.out.println(f2.exists());//是否存在
+        System.out.println(f2.isFile());//是否是文件
+        System.out.println(f2.isDirectory());//是否是文件夹
+
+        //返回文件的大小（字节数量）
+        long length = f1.length();
+        System.out.println(length);
+        long length2=f2.length();
+        System.out.println(length2);
+
+        //返回文件的绝对路径
+        File f3=new File("MyFile"+File.separator+"aa.txt");
+        System.out.println(f3.getAbsolutePath());///Users/ptx/Desktop/java-project/MyFile/aa.txt
+        //不管参数是什么都获取到了绝对路径
+
+        //返回定义文件时使用的路径
+        //getPath函数 其他跟绝对路径都差不多
+
+        //获取名字（返回文件的名称，有后缀会把后缀一起返回
+        System.out.println(f3.getName());
+
+        //返回文件的最后修改时间（ms）
+        long l = f1.lastModified();
+        System.out.println(l);
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy年MM月dd日 HH时mm分ss秒");
+        Date date=new Date(l);
+        System.out.println(sdf.format(date));
+
+
+
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
