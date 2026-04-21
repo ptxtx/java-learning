@@ -1,0 +1,123 @@
+//捕获异常
+import java.util.Arrays;
+
+public class ExceptionDemo2 {
+    public static void main(String[] args) {
+        int[] arr={1,2,3,4,5,6};
+        try{
+            System.out.println(arr[10]);
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("索引越界");//此处出现异常，程序就会在这里创建一个ArrayIndex...的对象。再拿着这个对象跟catch里相比
+        }
+        System.out.println("看看我执行了没");
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//抛出异常
+public class ExceptionDemo4 {
+    public static void main(String[] args) {
+        int[] arr={1,2,3,4,5};
+        int max= 0;
+        try {
+            max = getMax(arr);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("空指针异常");
+        } catch (NullPointerException e) {
+            System.out.println("索引越界异常");
+        }
+        System.out.println(max);
+
+    }
+    public static int getMax(int[] arr)throws ArrayIndexOutOfBoundsException,NullPointerException{//运行时异常，可不写
+        if(arr==null){
+            throw new NullPointerException();//手动创建异常对象，并把这个异常交给方法的调用者处理
+        }
+        if(arr.length==0){
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        //这样能够提高代码的健壮性
+        int max=arr[0];
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]>max){
+                max=arr[i];
+            }
+
+        }
+        return max;
+    }
+}
+
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//异常综合练习
+import java.util.Scanner;
+
+public class Exercise1 {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        girlfriend gf=new girlfriend();
+        while (true) {
+            try {
+                System.out.println("请输入心仪女朋友的名字：");
+                String name=sc.nextLine();
+                gf.setName(name);
+                System.out.println("请输入心仪女朋友的年龄：");
+                String ageStr=sc.nextLine();
+                int age=Integer.parseInt(ageStr);
+                gf.setAge(age);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.print("年龄格式有误，请输入数字");
+                continue;
+            }catch(RuntimeException e){
+                System.out.println("姓名的长度或年龄有误");
+                continue;
+            }
+        }
+        System.out.println(gf);
+    }
+}
+package MyException;
+
+public class girlfriend {
+    private String name;
+    private int age;
+    public girlfriend(String name, int age) {
+        this.name = name;
+    }
+    public girlfriend() {}
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        int length = name.length();
+        if(length<3||length>10){
+            throw new RuntimeException();
+        }
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        if(age<18||age>40){
+            throw new RuntimeException();
+        }
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "girlfriend{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+//！！！！！！！在Set里就抛出异常，让调用者处理
+//这里的处理是 重新输入，直到符合输入要求为止，那么这里用while(true)
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
