@@ -120,4 +120,102 @@ public class girlfriend {
 //！！！！！！！在Set里就抛出异常，让调用者处理
 //这里的处理是 重新输入，直到符合输入要求为止，那么这里用while(true)
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//在第一个练习的基础上加入自定义异常（完整修改版）
+import java.util.Scanner;
+
+public class Exercise1 {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        girlfriend gf=new girlfriend();
+        while (true) {
+            try {
+                System.out.println("请输入心仪女朋友的名字：");
+                String name=sc.nextLine();
+                gf.setName(name);
+                System.out.println("请输入心仪女朋友的年龄：");
+                String ageStr=sc.nextLine();
+                int age=Integer.parseInt(ageStr);
+                gf.setAge(age);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.print("年龄格式有误，请输入数字");
+                continue;
+            }catch(NameFormatException e){
+                e.printStackTrace();
+            }
+            catch(AgeOutOfBoundsException e){
+                e.printStackTrace();
+            }
+        }
+        System.out.println(gf);
+    }
+}
+package MyException;
+
+public class girlfriend {
+    private String name;
+    private int age;
+    public girlfriend(String name, int age) {
+        this.name = name;
+    }
+    public girlfriend() {}
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        int length = name.length();
+        if(length<3||length>10){
+            throw new NameFormatException(name+"格式有误，长度应为3～10");
+        }
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        if(age<18||age>40){
+            throw new AgeOutOfBoundsException(age+"超出范围");
+        }
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "girlfriend{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
+
+}
+
+public class NameFormatException extends RuntimeException{
+    //NameFormat：表示当前异常的名字，表示姓名格式化问题
+    //运行时：继承RuntimeException
+    //编译时：继承Exception
+
+
+    public NameFormatException() {
+        super();
+    }
+
+    public NameFormatException(String message) {
+        super(message);
+    }
+}
+
+public class AgeOutOfBoundsException extends RuntimeException{
+    public AgeOutOfBoundsException(String message) {
+        super(message);
+    }
+    public AgeOutOfBoundsException() {}
+
+
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
