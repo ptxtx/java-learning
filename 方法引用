@@ -108,7 +108,7 @@ public class Student {
                 ", age=" + age +
                 '}';
     }
-——————————————————————————！！！！！！！！！！！！！！！！！
+——————————————————————————！！！！！！！！！！！！！！！！！！！！！
     public Student(String str) {
         String[] split = str.split(",");
         this.name = split[0];
