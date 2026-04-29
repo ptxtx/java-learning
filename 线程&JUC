@@ -68,3 +68,253 @@ public class MyRun implements Runnable{
 
 }
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//线程的第三种实现方式：特点 可以获得多线程的运行结果
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+
+public class ThreadDemo3 {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        /*
+        多线程的第三种实现方式
+            特点：可以获得多线程的运行结果
+
+            创建一个类实现Callable接口
+            重写call（是有返回值的，表示多线程的运行结果）
+
+            创建这个类的对象（表示多线程要执行的任务）
+            创建FutureTask的对象（管理多线程运行的结果）
+            创建Thread类的对象并启动
+         */
+
+        MyCallable mc=new MyCallable();
+        FutureTask<Integer> ft=new FutureTask<>(mc);
+        Thread t1=new Thread(ft);
+        t1.start();
+
+        Integer res = ft.get();
+        System.out.println(res);
+    }
+}
+
+import java.util.concurrent.Callable;
+
+public class MyCallable implements Callable<Integer> {
+    @Override
+    public Integer call() throws Exception {
+        int sum=0;
+        for(int i=0;i<100;i++){
+            sum+=i;
+        }
+        return sum;
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//线程优先级
+public class ThreadDemo5 {
+    public static void main(String[] args) {
+        //线程优先级
+        MyRun mr=new MyRun();
+        Thread t1=new Thread(mr,"飞机");
+        Thread t2=new Thread(mr,"坦克");
+
+//        System.out.println(t1.getPriority());
+//        System.out.println(t2.getPriority());
+        t1.setPriority(1);
+        t2.setPriority(10);
+        t1.start();
+        t2.start();
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//守护线程
+public class ThreadDemo6 {
+    public static void main(String[] args) {
+        //设置为守护线程
+        MyThread myThread = new MyThread("女神");
+        MyThread2 myThread2 = new MyThread2("备胎");
+        myThread2.setDaemon(true);//将t2设置为守护线程
+        myThread.start();
+        myThread2.start();
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//礼让线程
+public class ThreadDemo7 {
+    public static void main(String[] args) {
+        //礼让线程
+        MyThread t1 = new MyThread("坦克");
+        MyThread t2 = new MyThread("飞机");
+
+        t1.start();
+        t2.start();
+
+    }
+}
+
+public class MyThread extends Thread {
+    public MyThread(String name) {
+        super(name);
+    }
+
+    public MyThread() {
+    }
+
+    @Override
+    public void run() {
+        //书写线程要执行的代码
+        for(int i=0;i<100;i++){
+            System.out.println(getName()+"HelloWorld");
+            Thread.yield();//————————————————————————出让当前cpu的执行权（尽可能）
+        }
+    }
+
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//插入线程
+public class ThreadDemo8 {
+    public static void main(String[] args) throws InterruptedException {
+        //插入线程
+        MyThread myThread = new MyThread("土豆");
+        myThread.start();
+
+        myThread.join();//表示把myThread这个线程插入到当前线程之前
+
+        for(int i=0;i<10;i++){
+            System.out.println("main线程"+i);
+        }
+
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+public class ThreadDemo9 {
+    public static void main(String[] args) {
+        /*
+        需求：
+            某电影院在3个窗口卖票，请设计一个程序模拟该电影院卖票
+
+         */
+        MyThread4 t1=new MyThread4();
+        MyThread4 t2=new MyThread4();
+        MyThread4 t3=new MyThread4();
+        t1.setName("窗口1");
+        t2.setName("窗口2");
+        t3.setName("窗口3");
+      //  t1.setPriority(1);
+       // t3.setPriority(8);
+
+        t1.start();
+        t2.start();
+        t3.start();
+
+    }
+}
+
+public class MyThread3 extends Thread {
+
+    static int ticket=0;//表示共享ticket
+
+   // static Object obj=new Object();//锁对象，一定要是唯一的
+    @Override
+    public void run() {
+        while (true) {
+            //同步代码块
+           synchronized (MyThread3.class) {//以该类的字节码文件作为锁对象
+               if(ticket<100){
+
+                   ticket++;
+                   System.out.println(getName()+"正在卖第"+ticket+"张票");
+               }else{
+                   break;
+               }
+               try {
+                   Thread.sleep(10);
+               } catch (InterruptedException e) {
+                   throw new RuntimeException(e);
+               }
+           }
+        }
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//用lock代替synchronized
+package MyThread;
+
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class MyThread4 extends Thread {
+
+    static int ticket=0;//表示共享ticket
+    static Lock lock=new ReentrantLock();
+
+   // static Object obj=new Object();//锁对象，一定要是唯一的
+    @Override
+    public void run() {
+        while (true) {
+            //同步代码块
+          //synchronized (MyThread4.class) {//以该类的字节码文件作为锁对象
+            lock.lock();
+            try {
+               if(ticket<100){
+                   ticket++;
+                   System.out.println(getName()+"正在卖第"+ticket+"张票");
+               }else{
+                   break;
+               }
+
+                   Thread.sleep(10);
+               } catch (InterruptedException e) {
+                   throw new RuntimeException(e);
+               }finally {
+                lock.unlock();
+            }
+
+           //}
+        }
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//同步方法---可以先写同步代码块 再将synchronized中的代码提取成方法
+public class ThreadDemo10 {
+    public static void main(String[] args) {
+        //把Demo9 利用同步方法完成
+        MyRunnable myRunnable = new MyRunnable();
+        Thread t1 = new Thread(myRunnable);
+        Thread t2 = new Thread(myRunnable);
+        Thread t3 = new Thread(myRunnable);
+
+        t1.setName("t1");
+        t2.setName("t2");
+        t3.setName("t3");
+
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+}
+
+
+public class MyRunnable implements Runnable {
+    int ticket=0;
+
+    @Override
+    public void run() {
+        while(true){
+            if (method()) break;
+        }
+    }
+
+    private synchronized boolean method() {
+        if(ticket==100){
+            return true;
+        }
+        else{
+            ticket++;
+            System.out.println(Thread.currentThread().getName()+"在卖第"+ticket+"张票");
+        }
+        return false;
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
