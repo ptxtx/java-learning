@@ -508,4 +508,32 @@ public class Mycallable implements Callable<Integer> {
     }
 }
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//自定义线程池（注意构造函数7个形参分别是啥） 自定义完之后就可以提交任务啥的了
+package MyThread.MyThreadPool2;
+
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+public class ThreadPoolDemo1 {
+    public static void main(String[] args) {
+        //自定义线程池
+        ThreadPoolExecutor pool=new ThreadPoolExecutor(
+                3,//核心线程
+                6,//最大线程数
+                60,//60
+                TimeUnit.SECONDS,//秒
+                new ArrayBlockingQueue<>(3),//任务队列
+                Executors.defaultThreadFactory(),//创建线程工厂
+                new ThreadPoolExecutor.AbortPolicy()//静态内部类
+        );
+        //pool.submit........
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+
+
+
 
