@@ -317,4 +317,195 @@ public class MyRunnable implements Runnable {
     }
 }
 ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//线程综合练习  两个抽奖箱分别抽奖（newMyThread是MyThread的改进代码，在run方法中创建集合 因为每个线程都有自己的栈）
+package MyThread.Test4;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class ThreadDemo {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Collections.addAll(list,10,5,20,50,100,200,500,800,2,80,300,700);
+        MyThread t1=new MyThread(list);
+        MyThread t2=new MyThread(list);
+
+        newMyThread t11=new newMyThread(list);
+        newMyThread t22=new newMyThread(list);
+        newMyThread t33=new newMyThread(list);
+        newMyThread t44=new newMyThread(list);
+
+
+        t1.setName("抽奖箱1");
+        t2.setName("抽奖箱2");
+
+        t11.setName("抽奖箱1");
+        t22.setName("抽奖箱2");
+        t33.setName("抽奖箱3");
+        t44.setName("抽奖箱4");
+
+        //t1.start();
+       // t2.start();
+        t11.start();
+        t22.start();
+        t33.start();
+        t44.start();
+    }
+}
+package MyThread.Test4;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class MyThread extends Thread {
+    ArrayList<Integer> list;
+    public MyThread(ArrayList<Integer> list) {
+        this.list = list;
+    }
+    static ArrayList<Integer> list1=new ArrayList<>();
+    static ArrayList<Integer> list2=new ArrayList<>();
+    @Override
+    public void run() {
+        while (true) {
+            synchronized (MyThread.class) {
+                if(list.size()==0){
+                    if("抽奖箱1".equals(getName())){
+                        System.out.println("抽奖箱1"+list1);
+                    }
+                    else{
+                        System.out.println("抽奖箱2"+list2);
+
+                    }
+
+                    break;
+                }else{
+                    Collections.shuffle(list);
+                    Integer remove = list.remove(0);
+                    //System.out.println(getName()+"又产生了一个"+remove+"元的大奖");
+                    if("抽奖箱1".equals(getName())){
+                        list1.add(remove);
+                    }
+                    else{
+                        list2.add(remove);
+                    }
+                }
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+package MyThread.Test4;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class newMyThread extends Thread {
+    ArrayList<Integer> list;
+    public newMyThread(ArrayList<Integer> list) {
+        this.list = list;
+    }
+
+    @Override
+    public void run() {
+        ArrayList<Integer> boxList = new ArrayList<>();//每个线程都会创建自己的集合
+        while (true) {
+            synchronized (MyThread.class) {
+                if(list.size()==0){
+                    System.out.println(getName()+boxList);
+                    break;
+                }else{
+                    Collections.shuffle(list);
+                    Integer remove = list.remove(0);
+                    //System.out.println(getName()+"又产生了一个"+remove+"元的大奖");
+                   boxList.add(remove);
+                }
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//综合练习---上面那个练习的pro版本 要比较两个抽奖箱的抽奖结果 谁抽到了更大的
+//------------像这种需要比较线程运行结果的，就需要用到线程的第三种创建方式 实现callable接口
+package MyThread.Test5ofNewtest4;
+
+import MyThread.Test4.MyThread;
+import MyThread.Test4.newMyThread;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+
+public class ThreadDemo {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        ArrayList<Integer> list = new ArrayList<>();
+        Collections.addAll(list, 10, 5, 20, 50, 100, 200, 500, 800, 2, 80, 300, 700);
+        Mycallable mc=new Mycallable(list);
+
+        //因为要区分具体是哪一个抽奖箱得到的最大值，所以为每一个抽奖箱都分配了一个管理器
+        FutureTask<Integer> ft1=new FutureTask<>(mc);
+        FutureTask<Integer> ft2=new FutureTask<>(mc);
+
+        Thread t1=new Thread(ft1);
+        Thread t2=new Thread(ft2);
+        t1.setName("抽奖箱1");
+        t2.setName("抽奖箱2");
+        t1.start();
+        t2.start();
+
+        Integer max1 = ft1.get();
+        Integer max2 = ft2.get();
+        System.out.println("max1="+max1);
+        System.out.println("max2="+max2);
+
+
+    }
+}
+package MyThread.Test5ofNewtest4;
+
+import MyThread.Test4.MyThread;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.concurrent.Callable;
+
+public class Mycallable implements Callable<Integer> {
+    ArrayList<Integer> list;
+    public Mycallable(ArrayList<Integer> list) {
+        this.list = list;
+    }
+
+    @Override
+    public Integer call() throws Exception {
+        ArrayList<Integer> boxList = new ArrayList<>();//每个线程都会创建自己的集合
+        while (true) {
+            synchronized (MyThread.class) {
+                if(list.size()==0){
+                    System.out.println(Thread.currentThread().getName()+boxList);
+                    break;
+                }else{
+                    Collections.shuffle(list);
+                    Integer remove = list.remove(0);
+                    //System.out.println(getName()+"又产生了一个"+remove+"元的大奖");
+                   boxList.add(remove);
+                }
+            }
+                Thread.sleep(100);
+        }
+        if(boxList.size()==0){return null;}
+        else{
+            return Collections.max(boxList);
+        }
+    }
+}
+————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
