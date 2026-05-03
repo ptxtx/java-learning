@@ -333,7 +333,7 @@ public class ThreadDemo {
         newMyThread t11=new newMyThread(list);
         newMyThread t22=new newMyThread(list);
         newMyThread t33=new newMyThread(list);
-        newMyThread t44=new newMyThread(list);
+        newMyThread t44=new newMyThread(list);//
 
 
         t1.setName("抽奖箱1");
