@@ -439,5 +439,45 @@ public class l219 {
     }
 }
 ———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//l228
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class l228 {
+    public static void main(String[] args) {
+
+    }
+    public static List<String> summaryRanges(int[] nums) {
+        List<String> list=new ArrayList<>();
+        int maxconstant=0;
+        for(int i=0;i<nums.length;){
+            maxconstant=maxConstant(nums,i);
+            if(i!=maxconstant){
+                list.add(nums[i]+"->"+nums[maxconstant]);
+            }
+            else {
+
+                list.add(String.valueOf(nums[i]));
+            }
+            i=maxconstant+1;
+
+        }
+        return list;
+
+    }
+    public static int maxConstant(int[]nums,int start){
+        while(start<nums.length-1){
+            if(nums[start+1]==nums[start]+1){
+                start++;
+            }else{
+                break;
+            }
+        }
+        return start;
+
+    }
+}
+———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 
